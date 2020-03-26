@@ -1,0 +1,120 @@
+﻿$colors: (
+// DEKLARERA FLERA FÄRGER
+accent: #ee8a29, accent2: #fff, darkAccent : #97591d);
+
+@function color($color-name) {
+    @return map-get($colors, $color-name);
+}
+
+.validation-summary-errors
+{
+   li{
+color: white;
+    }
+}
+.s2 {
+
+    p {
+        color: white;
+    }
+
+    label {
+        color: white;
+    }
+}
+.form {
+   text-align: center;
+button {
+    width: 60%;
+    margin-left: 15px;
+    color: color(accent2);
+    outline: none !important;
+    border: none !important;
+    border-radius: 5px;
+    padding: 5px 0px 5px 0px;
+    background-image: linear-gradient(color(accent), color(darkAccent));
+
+    &:hover {
+        background-image: linear-gradient(#c46407, #6f3f10);
+    }
+}
+}
+.inline {
+    display: inline-block !important;
+}
+textarea{
+    width: 80%;
+ height: 500px;
+}
+
+#filter {
+    width: 50%;
+    margin: 0 auto;
+    color: color(accent2);
+    outline: none !important;
+    border: none !important;
+    border-radius: 5px;
+    padding: 5px 0px 5px 0px;
+    background-image: linear-gradient(color(accent), color(darkAccent));
+
+    &:hover {
+        background-image: linear-gradient(#c46407, #6f3f10);
+    }
+}
+
+
+.button {
+    width: auto;
+    margin-left: 15px;
+    color: color(accent2)!important;
+    outline: none !important;
+    border: none !important;
+    border-radius: 5px;
+    padding: 5px 20px 5px 20px;
+    background-image: linear-gradient(color(accent), color(darkAccent));
+
+    &:hover {
+        background-image: linear-gradient(#c46407, #6f3f10);
+        color: white;
+    }
+}
+.delete {
+    background: #601010;
+
+    &:hover {
+        background-image: linear-gradient(#c46407, #6f3f10);
+        color: white;
+        background: #4a0909;
+    }
+}
+.btn-primary {
+    width: auto;
+    margin-left: 15px;
+    color: color(accent2)!important;
+    outline: none !important;
+    border: none !important;
+    border-radius: 5px;
+    padding: 5px 20px 5px 20px;
+    background-image: linear-gradient(color(accent), color(darkAccent));
+
+    &:hover {
+        background-image: linear-gradient(#c46407, #6f3f10);
+        color: white;
+    }
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: transparent;
+    opacity: 1;
+    outline: none;
+    border: none;
+    color: black;
+
+    &:hover {
+        background-color: transparent;
+        opacity: 1;
+        outline: none;
+        border: none;
+        color: black;
+    }
+}

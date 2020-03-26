@@ -1,0 +1,151 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Ekfeldt & Co</title>
+    <meta charset="utf-8">
+
+    <script src="https://kit.fontawesome.com/08fc0a0a1d.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lora&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.ckeditor.com/4.11.3/standard/ckeditor.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.png" />
+
+
+
+
+
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-light box-shadow mb-3" id="menu">
+            <div class="container">
+                <a class="navbar-brand logo text-white" asp-area="" asp-controller="Home" asp-action="Index">Ekfeldt & Co</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-lg-inline-flex flex-lg-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Startsida</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="TillSalu">Tillsalu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Kopa">Sälja</a>
+                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Homes" asp-action="Index">Objekt</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Brokers" asp-action="Index">Mäklare</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Biddings" asp-action="Index">Budgivningar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Demonstrations" asp-action="Index">Visningar</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+    <main role="main" class="pb-3">
+        @RenderBody()
+        <footer class="section fp-auto-height">
+            <div class="container">
+                <h1>Ekfeldt & Co</h1>
+                <hr />
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2>Kontakt</h2>
+                        <ul>
+
+                            <li>Mäklargatan 10</li>
+                            <li>31 655, Mäkleborg</li>
+                            <li>Telefon kontor: 0648-84612</li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Öppettider</h2>
+                        <ul>
+
+
+                            <li>Mån - fre: 10.00-18.00</li>
+                            <li>Lör - sön: 10.00-15.00</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Följ oss</h2>
+                        <ul>
+
+
+                            <li>
+                                <i class="fab fa-instagram"></i>
+                            </li>
+                            <li><i class="fab fa-facebook"></i></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <hr />
+                <div class="btmFooter">
+                    <p>
+                        © Rebecca Seiron &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;A <a href="https://webuals.com/">Webuals</a> production |
+                        &nbsp;&nbsp;&nbsp;&nbsp; @if (SignInManager.IsSignedIn(User))
+                        {
+                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <input type="submit" class="nav-link btn btn-link text-dark" value="Logga ut" />
+                            </form>
+                        }
+                        else
+                        {<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Logga in</a>}
+                    </p>
+                </div>
+            </div>
+        </footer>
+   
+    </main>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.min.js"></script>
+    <script>
+        new fullpage('#fullpage', {
+            //options here
+            autoScrolling: true,
+            scrollHorizontally: true,
+            navigation: true,
+            navigationPosition: 'left',
+
+        });
+
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,495 @@
+﻿
+@model project.ViewModels.HomesCreateViewModel
+
+@{
+    ViewData["Title"] = "Lägg till hem";
+    var date = DateTime.Now;
+}
+    <div class="section">
+        <div id="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-2 high social">
+                        <ul>
+                            <li>
+                                <i class="fab fa-instagram"></i>
+                            </li>
+                            <li><i class="fab fa-facebook"></i></li>
+                        </ul>
+                    </div>
+                    <div class="col high main">
+                        <h1>Lägg till hem</h1><h2></h2>
+
+                    </div>
+                    <div class="col-sm-5 high">
+                        <img src="~/images/man.png" alt="En man" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<div class="section fp-destroyed container marginTop imageFix adminfix">
+   
+
+    <h4>Hem</h4>
+    <hr />
+
+
+
+    <div class="row">
+        <div class="col">
+            <form asp-action="Create" enctype="multipart/form-data" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h2>Allmänt</h2>
+                <input type="hidden" asp-for="PublishDate" class="form-control" value="@date" />
+                <div class="form-group">
+                    <label class="control-label">Mäklare</label>
+                    <select asp-for="Brokers" class="form-control" asp-items="ViewBag.BrokersId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label"></label>
+                    <!--<input asp-for="Type" class="form-control" />-->
+                    <select name="Type" id="type">
+                        <option value="">Välj typ</option>
+                        <option value="Villa">Villa</option>
+                        <option value="Bostadsrätt">Bostadsrätt</option>
+                        <option value="Radhus">Radhus</option>
+                        <option value="Gård">Gård</option>
+                        <option value="Skog">Skog</option>
+                        <option value="Fritidshus">Fritidshus</option>
+                        <option value="Tomt">Tomt</option>
+                    </select>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Street" class="control-label"></label>
+                    <input asp-for="Street" class="form-control" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="County" class="control-label"></label>
+                    <input asp-for="County" class="form-control" />
+                    <span asp-validation-for="County" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PostalCode" class="control-label"></label>
+                    <input asp-for="PostalCode" class="form-control" />
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="District" class="control-label"></label>
+                    <input asp-for="District" class="form-control" />
+                    <span asp-validation-for="District" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Room" class="control-label"></label>
+                    <input asp-for="Room" class="form-control" />
+                    <span asp-validation-for="Room" class="text-danger"></span>
+                </div>
+                <div class="form-group appartment">
+                    <label asp-for="AppartmentNumber" class="control-label"></label>
+                    <input asp-for="AppartmentNumber" class="form-control" />
+                    <span asp-validation-for="AppartmentNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group appartment">
+                    <label asp-for="Society" class="control-label"></label>
+                    <input asp-for="Society" class="form-control" />
+                    <span asp-validation-for="Society" class="text-danger"></span>
+                </div>
+                <div class="form-group appartment">
+                    <label asp-for="Floor" class="control-label"></label>
+                    <input asp-for="Floor" value="0" class="form-control" />
+                    <span asp-validation-for="Floor" class="text-danger"></span>
+                </div>
+                <div class="form-group appartment">
+                    <label asp-for="Elevator" class="control-label"></label>
+                    <!--<input asp-for="Elevator" class="form-control" /> -->
+                    <select name="Elevator">
+                        <option value="">Finns hiss?</option>
+                        <option value="Ja">Ja</option>
+                        <option value="Nej">Nej</option>
+                    </select>
+                    <span asp-validation-for="Elevator" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <!--  <div class="form-group form-check">
+    <label class="form-check-label">-->
+                <input type="hidden" value="false" class="form-check-input" asp-for="Bidding" /><!-- Html.DisplayNameFor(model => model.Bidding)-->
+                <!--  </label>
+    </div>-->
+                <h2>Bostaden</h2>
+                <div class="form-group">
+                    <label asp-for="HomeType" class="control-label"></label>
+                    <!-- <input asp-for="HomeType" class="form-control" /> -->
+                    <select name="HomeType">
+                        <option value="">Välj bostadstyp</option>
+                        <option value="Enfamiljshus">Enfamiljshus</option>
+                        <option value="Flerfamiljshus">Flerfamiljshus</option>
+                        <option value="Lantbruksbyggnad">Lantbruksbyggnad</option>
+                    </select>
+                    <span asp-validation-for="HomeType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tow" class="control-label"></label>
+                    <!--<input asp-for="Tow" class="form-control" />-->
+                    <select name="Tow">
+                        <option value="">Välj upplåtelseform</option>
+                        <option value="Äganderätt">Äganderätt</option>
+                        <option value="Bostadsrätt">Bostadsrätt</option>
+                        <option value="Kooperativ hyresrätt">Kooperativ hyresrätt</option>
+                    </select>
+                    <span asp-validation-for="Tow" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LivingArea" class="control-label"></label>
+                    <input value="0" asp-for="LivingArea" class="form-control" />
+                    <span asp-validation-for="LivingArea" class="text-danger"></span>
+                </div>
+                <div class="form-group home">
+                    <label asp-for="BiArea" class="control-label"></label>
+                    <input value="0" asp-for="BiArea" class="form-control" />
+                    <span asp-validation-for="BiArea" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GardenArea" class="control-label"></label>
+                    <input value="0" asp-for="GardenArea" class="form-control" />
+                    <span asp-validation-for="GardenArea" class="text-danger"></span>
+                </div>
+                <div class="form-group home">
+                    <label asp-for="BuildningSystem" class="control-label"></label>
+                    <input asp-for="BuildningSystem" class="form-control" />
+                    <span asp-validation-for="BuildningSystem" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Renovations" class="control-label"></label>
+                    <input asp-for="Renovations" class="form-control" />
+                    <span asp-validation-for="Renovations" class="text-danger"></span>
+                </div>
+                <div class="form-group home">
+                    <label asp-for="OtherBuildnings" class="control-label"></label>
+                    <input asp-for="OtherBuildnings" class="form-control" />
+                    <span asp-validation-for="OtherBuildnings" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LivingSpaceComment" class="control-label"></label>
+                    <input asp-for="LivingSpaceComment" class="form-control" />
+                    <span asp-validation-for="LivingSpaceComment" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Parking" class="control-label"></label>
+                    <input asp-for="Parking" class="form-control" />
+                    <span asp-validation-for="Parking" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TvInternet" class="control-label"></label>
+                    <input asp-for="TvInternet" class="form-control" />
+                    <span asp-validation-for="TvInternet" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HeatVentilation" class="control-label"></label>
+                    <input asp-for="HeatVentilation" class="form-control" />
+                    <span asp-validation-for="HeatVentilation" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BuildningYear" class="control-label"></label>
+                    <input value="0" asp-for="BuildningYear" class="form-control" />
+                    <span asp-validation-for="BuildningYear" class="text-danger"></span>
+                </div>
+                <h2 class="appartment">Föreningen</h2>
+                <div class="form-group appartment">
+                    <label asp-for="MounthlyFee" class="control-label"></label>
+                    <input value="0" asp-for="MounthlyFee" class="form-control" />
+                    <span asp-validation-for="MounthlyFee" class="text-danger"></span>
+                </div>
+                <div class="form-group appartment">
+                    <label asp-for="PartOfSociety" class="control-label"></label>
+                    <input value="0" asp-for="PartOfSociety" class="form-control" />
+                    <span asp-validation-for="PartOfSociety" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check appartment">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="PawnBroking" /> @Html.DisplayNameFor(model => model.PawnBroking)
+                    </label>
+                </div>
+                <div class="form-group appartment">
+                    <label asp-for="AboutSociety" class="control-label"></label>
+                    <textarea name="AboutSociety" asp-for="AboutSociety" class="form-control"></textarea>
+
+                    <span asp-validation-for="AboutSociety" class="text-danger"></span>
+                </div>
+                <div class="form-group appartment">
+                    <label asp-for="CommonAreas" class="control-label"></label>
+                    <input asp-for="CommonAreas" class="form-control" />
+                    <span asp-validation-for="CommonAreas" class="text-danger"></span>
+                </div>
+                <div class="form-group appartment">
+                    <label asp-for="TransactionFee" class="control-label"></label>
+                    <input value="0" asp-for="TransactionFee" class="form-control" />
+                    <span asp-validation-for="TransactionFee" class="text-danger"></span>
+                </div>
+                <div class="form-group appartment">
+                    <label asp-for="TransactionFeePaidBy" class="control-label"></label>
+       
+                    <select name="TransactionFeePaidBy">
+                        <option value="">Välj</option>
+                        <option value="Köparen">Köparen</option>
+                        <option value="Säljaren">Säljaren</option>
+                    </select>
+                    <span asp-validation-for="TransactionFeePaidBy" class="text-danger"></span>
+                </div>
+                <h2>Ekonomi</h2>
+                <div class="form-group">
+                    <label asp-for="OperationCost" class="control-label"></label>
+                    <input value="0" asp-for="OperationCost" class="form-control" />
+                    <span asp-validation-for="OperationCost" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TypeCode" class="control-label"></label>
+                    <input asp-for="TypeCode" class="form-control" />
+                    <span asp-validation-for="TypeCode" class="text-danger"></span>
+                </div>
+                <div class="form-group home">
+                    <label asp-for="TaxValue" class="control-label"></label>
+                    <input value="0" asp-for="TaxValue" class="form-control" />
+                    <span asp-validation-for="TaxValue" class="text-danger"></span>
+                </div>
+                <div class="form-group home">
+                    <label asp-for="TaxValueProperty" class="control-label"></label>
+                    <input value="0" asp-for="TaxValueProperty" class="form-control" />
+                    <span asp-validation-for="TaxValueProperty" class="text-danger"></span>
+                </div>
+                <div class="form-group home">
+                    <label asp-for="TaxValueLand" class="control-label"></label>
+                    <input value="0" asp-for="TaxValueLand" class="form-control" />
+                    <span asp-validation-for="TaxValueLand" class="text-danger"></span>
+                </div>
+                <div class="form-group home">
+                    <label asp-for="TaxYear" class="control-label"></label>
+                    <input value="0" asp-for="TaxYear" class="form-control" />
+                    <span asp-validation-for="TaxYear" class="text-danger"></span>
+                </div>
+                <div class="form-group home">
+                    <label asp-for="PawnLetters" class="control-label"></label>
+                    <input asp-for="PawnLetters" class="form-control" />
+                    <span asp-validation-for="PawnLetters" class="text-danger"></span>
+                </div>
+                <h2 class="home">Kostnader</h2>
+                <div class="form-group home">
+                    <label asp-for="Heating" class="control-label"></label>
+                    <input value="0" asp-for="Heating" class="form-control" />
+                    <span asp-validation-for="Heating" class="text-danger"></span>
+                </div>
+
+                <div class="form-group home">
+                    <label asp-for="PowerComsumption" class="control-label"></label>
+                    <input value="0" asp-for="PowerComsumption" class="form-control" />
+                    <span asp-validation-for="PowerComsumption" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EnergyCosts" class="control-label"></label>
+                    <input value="0" asp-for="EnergyCosts" class="form-control" />
+                    <span asp-validation-for="EnergyCosts" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumberOfOccupants" class="control-label"></label>
+                    <input value="0" asp-for="NumberOfOccupants" class="form-control" />
+                    <span asp-validation-for="NumberOfOccupants" class="text-danger"></span>
+                </div>
+                <div class="form-group home">
+                    <label asp-for="WaterAndSewedge" class="control-label"></label>
+                    <input value="0" asp-for="WaterAndSewedge" class="form-control" />
+                    <span asp-validation-for="WaterAndSewedge" class="text-danger"></span>
+                </div>
+                <div class="form-group home">
+                    <label asp-for="Cleaning" class="control-label"></label>
+                    <input value="0" asp-for="Cleaning" class="form-control" />
+                    <span asp-validation-for="Cleaning" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Insurance" class="control-label"></label>
+                    <input value="0" asp-for="Insurance" class="form-control" />
+                    <span asp-validation-for="Insurance" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="InsuranceComment" class="control-label"></label>
+                    <input asp-for="InsuranceComment" class="form-control" />
+                    <span asp-validation-for="InsuranceComment" class="text-danger"></span>
+                </div>
+                <h2 class="home energy">Energi</h2>
+                <div class="form-group form-check home">
+                    <label class="form-check-label">
+                        <input class="form-check-input" id="declaration" asp-for="EnergyDeclaration" /> @Html.DisplayNameFor(model => model.EnergyDeclaration)
+                    </label>
+                </div>
+
+                <div class="form-group home energy">
+                    <label asp-for="EnergyPerfomance" class="control-label"></label>
+                    <input value="0" asp-for="EnergyPerfomance" class="form-control" />
+                    <span asp-validation-for="EnergyPerfomance" class="text-danger"></span>
+                </div>
+                <div class="form-group home energy">
+                    <label asp-for="EnergyClass" class="control-label"></label>
+                    <!-- <input asp-for="EnergyClass" class="form-control" />-->
+                    <select name="EnergyClass">
+                        <option value="">Välj energiklass</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                    </select>
+
+                    <span asp-validation-for="EnergyClass" class="text-danger"></span>
+                </div>
+                <div class="form-group home energy">
+                    <label asp-for="SpecificEnergyUsage" class="control-label"></label>
+                    <input value="0" asp-for="SpecificEnergyUsage" class="form-control" />
+                    <span asp-validation-for="SpecificEnergyUsage" class="text-danger"></span>
+                </div>
+                <div class="form-group home energy">
+                    <label asp-for="DeclarationDate" class="control-label"></label>
+                    <input id="date" value="@date" name="DeclarationDate" class="form-control" />
+                    <span asp-validation-for="DeclarationDate" class="text-danger"></span>
+                </div>
+                <div class="form-group home energy">
+                    <label asp-for="Inspector" class="control-label"></label>
+                    <input asp-for="Inspector" class="form-control" />
+                    <span asp-validation-for="Inspector" class="text-danger"></span>
+                </div>
+                <h2>Sammanfattande text</h2>
+                <div class="form-group">
+                    <label asp-for="SummaryHeading" class="control-label"></label>
+                    <input asp-for="SummaryHeading" class="form-control" />
+                    <span asp-validation-for="SummaryHeading" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Summary" class="control-label"></label>
+                    <textarea asp-for="Summary" class="form-control"></textarea>
+                    <span asp-validation-for="Summary" class="text-danger"></span>
+                </div>
+                <h2>Information (längre text)</h2>
+                <div class="form-group">
+                    <label asp-for="Information" class="control-label"></label>
+                    <textarea name="Information" asp-for="Information" class="form-control"></textarea>
+                    <span asp-validation-for="Information" class="text-danger"></span>
+                </div>
+                <div class="form-group home">
+                    <label asp-for="OtherRightsAndLiabilities" class="control-label"></label>
+                    <input asp-for="OtherRightsAndLiabilities" class="form-control" />
+                    <span asp-validation-for="OtherRightsAndLiabilities" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <h3>Hero-bild</h3>
+                    <input id="imgInp" asp-for="Photo" />
+                    <label asp-for="Photo">Välj fil</label>
+                    <img id="displayImage" src="" />
+                </div>
+                <div id="textbox"></div>
+                <div class="form-group">
+                    <h3>Ladda upp flera bilder</h3>
+                    <input asp-for="Photos" id="gallery-photo-add" />
+                    <label asp-for="Photos">Välj fil</label>
+                    <div class="gallery"></div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Skapa" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Gå tillbaka</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+</div>
+
+<script src="~/js/menu.js"></script>
+<script src="~/js/AddHome.js"></script>
+<script>
+    CKEDITOR.replace('Information', {height: 400});
+    CKEDITOR.replace('AboutSociety', {height: 400});
+
+//]]>
+    // FOR HERO IMAGE
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#displayImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+            $("#textbox").html('<div class="form-group"><label>Bildtext</label><input type="text" required name="ImageText2" /></div> <input type="hidden" value="true" name="HeroImage2" />')
+        }
+    }
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+
+    // FOR MULTIPLE IMAGES
+    $(function () {
+
+        var imagesPreview = function (input, placeToInsertImagePreview) {
+
+            if (input.files) {
+                var filesAmount = input.files.length;
+                var s = 0;
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+
+
+                    reader.onload = function (event) {
+
+                        s++
+                        var x = s;
+                        $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        $($.parseHTML('<label>Bildtext </label><input type="text" required name="Multiple" />  <br /><label>Floorplan </label><input type="checkbox" class="plan' + x + '" value="false" /><input type="hidden" name="Floorplan3" value="false" id="min' + x + '" />')).appendTo(placeToInsertImagePreview);
+
+
+                        // CHANGE VALUE OF INPUT WHEN CHECKED
+
+                        $('.plan' + x + '[type=checkbox]').on('change', function () {
+                            $(".plan" + x + "[type='checkbox']:checked").each(function () {
+
+                                var box = document.getElementById("min" + x);
+                                box.value = "true";
+
+                            });
+                            $(".plan" + x + "[type='checkbox']:not(:checked)").each(function () {
+                                var box = document.getElementById("min" + x);
+                                box.value = "false";
+                            });
+                        });
+                    }
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+
+        };
+
+        $('#gallery-photo-add').on('change', function () {
+            imagesPreview(this, 'div.gallery');
+
+
+        });
+    });
+
+
+
+</script>

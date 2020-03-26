@@ -1,0 +1,55 @@
+﻿@model project.Models.Image
+
+@{
+    ViewData["Title"] = "Lägg till bild";
+}
+<div class="section container">
+    <h1>Lägg till bild</h1>
+
+    <h4>Bilder</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ImageAdress" class="control-label"></label>
+                    <input asp-for="ImageAdress" class="form-control" />
+                    <span asp-validation-for="ImageAdress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ImageText" class="control-label"></label>
+                    <input asp-for="ImageText" class="form-control" />
+                    <span asp-validation-for="ImageText" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="HeroImage" /> @Html.DisplayNameFor(model => model.HeroImage)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="FloorPlan" /> @Html.DisplayNameFor(model => model.FloorPlan)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HomeIds" class="control-label"></label>
+                    <input asp-for="HomeIds" class="form-control" />
+                    <span asp-validation-for="HomeIds" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+    </div>
+<script src="~/js/menu.js"></script>

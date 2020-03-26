@@ -1,0 +1,132 @@
+﻿@model project.Models.Persons
+
+@{
+    ViewData["Title"] = "Ändra";
+}
+
+<div class="section">
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 high social">
+                    <ul>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                        </li>
+                        <li><i class="fab fa-facebook"></i></li>
+                    </ul>
+                </div>
+                <div class="col high main">
+                    @{ if (Model.Bidder == true)
+                        {
+                            <h1>Uppdatera budgivare</h1>
+                        }
+                    }
+                    @{ if (Model.Viewer == true)
+                        {
+                            <h1>Uppdatera bokare</h1>
+                        }
+                    }
+
+
+                </div>
+                <div class="col-sm-5 high">
+                    <img src="~/images/man.png" alt="En man" />
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container marginTop">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="PersonId" />
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Street" class="control-label"></label>
+                    <input asp-for="Street" class="form-control" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PostalCode" class="control-label"></label>
+                    <input asp-for="PostalCode" class="form-control" />
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+
+                <input type="hidden" class="form-check-input" asp-for="Bidder" />
+
+
+                <input type="hidden" class="form-check-input" asp-for="Viewer" />
+
+                <div class="form-group">
+                    <label asp-for="PhoneNUmber" class="control-label"></label>
+                    <input asp-for="PhoneNUmber" class="form-control" />
+                    <span asp-validation-for="PhoneNUmber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                @{ if (Model.Viewer == true)
+                    {
+                        <div class="form-group">
+                            <!--Datum och tid-->
+
+                            <select name="DemonstrationId">
+                                @foreach (var demo in (List<Demonstration>)ViewBag.demos)
+                                {
+                                    var date = demo.BookingDate.ToString("yyyy/MM/dd");
+                                    var time = demo.BookingTime.ToString("HH:mm");
+                                    <option value="@demo.DemonstrationId">Datum: @date, kl: @time</option>
+                                }
+                            </select>
+                        </div>
+                    }}
+                <div class="form-group">
+         
+                    <input type="hidden" asp-for="BiddingIds" class="form-control" value="ViewBag.BiddingId">
+                 
+                </div>
+                <div class="form-group">
+                    <label>Objekt</label>
+                    <input type="hidden" asp-for="HomeId" class="form-control" />
+                    @{
+                        foreach (var item in @ViewBag.home)
+                        {
+                            <p>@item</p>
+                        }
+                    }
+                    <span asp-validation-for="HomeId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Spara" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Gå tillbaka</a>
+    </div>
+
+    </div>

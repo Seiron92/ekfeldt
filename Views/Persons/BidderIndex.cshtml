@@ -1,0 +1,109 @@
+﻿@model IEnumerable<project.Models.Persons>
+
+@{
+    ViewData["Title"] = "Budgivare";
+
+}
+
+<div class="section">
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 high social">
+                    <ul>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                        </li>
+                        <li><i class="fab fa-facebook"></i></li>
+                    </ul>
+                </div>
+                <div class="col high main">
+
+                    <h1>Budgivare</h1>
+
+
+
+                </div>
+                <div class="col-sm-5 high">
+                    <img src="~/images/man.png" alt="En man" />
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container marginTop">
+    @{
+        foreach (var item in @ViewBag.home)
+        {
+            <h3>@item</h3>
+        }
+    }
+
+    <a asp-action="CreateBidder" asp-controller="Persons" asp-route-homeId="@ViewBag.homeId" >Lägg till budgivare</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    Namn
+                </th>
+
+
+                <th>
+
+                    @Html.DisplayNameFor(model => model.PhoneNUmber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+
+                <th>
+
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var pers in (List<Persons>)ViewBag.persons)
+            {
+
+
+                <tr>
+                    <td>
+                        @pers.Amount
+                    </td>
+                    <td>
+                        @pers.FirstName
+                    </td>
+
+
+                    <td>
+                        @pers.PhoneNUmber
+                    </td>
+                    <td>
+                        @pers.Email
+                    </td>
+
+                    <td>
+                      
+                        <a asp-action="Details" asp-controller="Biddings" asp-route-demoId="@pers.DemonstrationId" asp-route-HomeId="@pers.HomeId" asp-route-id="@pers.BiddingIds">Detaljer</a> |
+                        <a asp-action="Delete" asp-controller="Persons" asp-route-id="@pers.PersonId">Radera bud</a>
+                    </td>
+                </tr>
+
+            }
+
+
+
+        </tbody>
+    </table>
+</div>
+
+
+<script src="~/js/menu.js"></script>

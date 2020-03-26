@@ -1,0 +1,371 @@
+﻿@model IEnumerable<project.Models.Homes>
+
+@{
+    ViewData["Title"] = "Tillsalu";
+}
+<div class="section">
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 high social">
+                    <ul>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                        </li>
+                        <li><i class="fab fa-facebook"></i></li>
+                    </ul>
+                </div>
+                <div class="col high main">
+                    <h1>Tillsalu</h1>
+
+                </div>
+                <div class="col-sm-5 high">
+                    <img src="~/images/man.png" alt="En man" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="section container">
+
+    <div class="inline icons">
+        <img id="villa" src="~/images/villa.png" alt="Ikon på villa"/>
+        <p>Villa</p>
+        <input type="checkbox" name="type" id="villa2" class="searchString" data-filter_id="Villa" value="Villa" />
+    </div>
+
+
+    <div class="inline icons">
+        <img id="bostadsratt" src="~/images/lagenhet.png" alt="Ikon på bostadsrätt" />
+        <p>Bostadsrätt</p>
+        <input type="checkbox" name="type" class="searchString" id="bostadsratt2" data-filter_id="Bostadsratt" value="Bostadsrätt" />
+    </div>
+
+    <div class="inline icons">
+        <img id="radhus" src="~/images/radhus.png" alt="Ikon på radhus" />
+        <p>Radhus</p>
+        <input type="checkbox" name="type" class="searchString" id="radhus2" value="Radhus" />
+    </div>
+
+    <div class="inline icons">
+        <img id="gard" src="~/images/gard.png" alt="Ikon på gård"/>
+        <p>Gård</p>
+        <input type="checkbox" name="type" class="searchString" id="gard2" value="Gård" />
+    </div>
+
+    <div class="inline icons">
+        <img id="fritidshus" src="~/images/fritidshus.png" alt="Ikon på fritidshus"/>
+        <p>Fritidshus</p>
+        <input type="checkbox" name="type" class="searchString" id="fritidshus2" value="Fritidshus" />
+    </div>
+
+    <div class="inline icons">
+        <img id="skog" src="~/images/skog.png" alt="Ikon på skog"/>
+        <p>Skog</p>
+        <input type="checkbox" name="type" class="searchString" id="skog2" value="Skog" />
+    </div>
+
+    <div class="inline icons">
+        <img id="tomt" src="~/images/tomt.png" alt="Ikon på tomt"/>
+        <p>Tomt</p>
+        <input type="checkbox" name="type" class="searchString" id="tomt2" value="Tomt" />
+    </div>
+
+    <input id="typesOutput" type="hidden" value="" />
+    <div class="form-group">
+        @Html.DropDownList("Districts", (SelectList)ViewBag.district, "Välj ", new { @class = "form-control district", @id = "District" })
+    </div>
+    <div class="row whitebk margin">
+        <div class="col center ">
+
+            <label><b>Välj minst antal rum</b></label><p id="minroomput"></p>
+            <div class="range-slider">
+                <input class="range-slider__range margin-top" type="range" id="minRoom" value="1" min="1" max="9">
+                <span class="range-slider__value margin-top">0 rum</span>
+            </div>
+            <label class="margin-top"><b>Välj max antal rum</b></label>
+            <div class="range-slider">
+
+                <input class="range-slider__range margin-top" type="range" id="maxRoom" value="10" min="1" max="10">
+                <span class="range-slider__value margin-top">0 rum</span>
+            </div>
+
+        </div>
+        <div class="col center">
+            <label><b>Minsta pris</b></label>
+            <div class="range--slider">
+                <input class="range-slider_range" type="range" id="minPrice" value="1" min="1" max="10000000">
+                <span class="range-slider_value">0 kr</span>
+            </div>
+
+            <label><b>Max pris</b></label>
+            <div class="range--slider">
+                <input class="range-slider_range" type="range" id="maxPrice" value="15000000" min="1" max="15000000">
+                <span class="range-slider_value">0 kr</span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="margin">
+        <input type="button" id="filter" value="Filtrera" />
+
+    </div>
+
+
+
+
+
+    <div class="row table" id="listnings">
+
+        @foreach (var item in Model)
+        {
+            if (item.deleted != true)
+            {
+
+                var price = item.Price.ToString("C0", new System.Globalization.CultureInfo("sv-SE"));
+                var area = item.GardenArea.ToString("# ### ### ###");
+
+                <div class="homesSection margin">
+
+                    <a asp-action="Details" asp-route-id="@item.HomeId" asp-route-BrokerId="@item.BrokerId">
+                        <img class="imagesInner" src="/images/@item.ImageAddress" alt="Bild på hus/bostadsrätt" />
+                        @if (item.Bidding == true)
+                        {<div class="bidding">Budgiving pågår</div>}
+                        <div class="inner">
+                            <h2>@Html.DisplayFor(modelItem => item.City)</h2><h3>@Html.DisplayFor(modelItem => item.Street)</h3><ul>
+                                <li> <i class="fas fa-home"></i> @Html.DisplayFor(modelItem => item.Type)</li>
+                                <li>
+                                    <i class="fas fa-ruler-combined"></i>@Html.DisplayFor(modelItem => item.LivingArea) @if (item.BiArea != 0)
+                                    {<p class="inline"> + </p> @Html.DisplayFor(modelItem => item.BiArea)}kvm
+                                </li>
+                                <li><i class="fas fa-tree"></i> @area kvm</li>
+                                <li><i class="fas fa-expand"></i> @Html.DisplayFor(modelItem => item.Room) rum</li>
+                            </ul><h3>@price</h3>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+
+    </div>
+
+
+</div>
+
+
+
+
+<script src="~/js/menu.js"></script>
+<script src="~/js/api.js"></script>
+<script>
+
+
+
+
+
+    var villa = document.getElementById("villa");
+    var villa2 = document.getElementById("villa2");
+    var skog = document.getElementById("skog");
+    var skog2 = document.getElementById("skog2");
+    var radhus = document.getElementById("radhus");
+    var radhus2 = document.getElementById("radhus2");
+    var fritidshus = document.getElementById("fritidshus");
+    var fritidshus2 = document.getElementById("fritidshus2");
+    var tomt = document.getElementById("tomt");
+    var tomt2 = document.getElementById("tomt2");
+    var gard = document.getElementById("gard");
+    var gard2 = document.getElementById("gard2");
+    var bostadsratt = document.getElementById("bostadsratt");
+    var bostadsratt2 = document.getElementById("bostadsratt2");
+    var typesOutput = document.getElementById("typesOutput");
+    var clickCounteVilla = 0;
+    var clickCounteTomt = 0;
+    var clickCounteGard = 0;
+    var clickCounteRadhus = 0;
+    var clickCounteSkog = 0;
+    var clickCounteFritidshus = 0;
+    var clickCounteBostadsratt = 0;
+
+    villa.onclick = function () {
+        villa2.checked = true;
+        villa.style.opacity = 0.6;
+        radhus.style.opacity = 1;
+        fritidshus.style.opacity = 1;
+        tomt.style.opacity = 1;
+        gard.style.opacity = 1;
+        skog.style.opacity = 1;
+        bostadsratt.style.opacity = 1;
+        villa.style.opacity = 0.6;
+        $('#villa2').prop('checked', true);
+        clickCounteVilla++
+        typesOutput.value = "Villa";
+
+        if (clickCounteVilla == 2) {
+            clickCounteVilla = 0;
+            villa2.checked = false;
+            villa.style.opacity = 1;
+            typesOutput.value = "";
+        }
+    }
+    radhus.onclick = function () {
+        radhus2.checked = true;
+        radhus.style.opacity = 0.6;
+        villa.style.opacity = 1;
+        fritidshus.style.opacity = 1;
+        tomt.style.opacity = 1;
+        gard.style.opacity = 1;
+        skog.style.opacity = 1;
+        bostadsratt.style.opacity = 1;
+        clickCounteRadhus++
+        typesOutput.value = "Radhus";
+
+        if (clickCounteRadhus == 2) {
+            clickCounteRadhus = 0;
+            radhus2.checked = false;
+            radhus.style.opacity = 1;
+            typesOutput.value = "";
+        }
+    }
+    skog.onclick = function () {
+        skog2.checked = true;
+        skog.style.opacity = 0.6;
+        radhus.style.opacity = 1;
+        fritidshus.style.opacity = 1;
+        tomt.style.opacity = 1;
+        gard.style.opacity = 1;
+        villa.style.opacity = 1;
+        bostadsratt.style.opacity = 1;
+        typesOutput.value = "Skog";
+        clickCounteSkog++
+        if (clickCounteSkog == 2) {
+            clickCounteSkog = 0;
+            skog2.checked = false;
+            skog.style.opacity = 1;
+            typesOutput.value = "";
+        }
+    }
+    gard.onclick = function () {
+
+        gard2.checked = true;
+        gard.style.opacity = 0.6;
+        radhus.style.opacity = 1;
+        fritidshus.style.opacity = 1;
+        tomt.style.opacity = 1;
+        villa.style.opacity = 1;
+        skog.style.opacity = 1;
+        bostadsratt.style.opacity = 1;
+        typesOutput.value = "Gård";
+        clickCounteGard++
+        if (clickCounteGard == 2) {
+            clickCounteGard = 0;
+            gard2.checked = false;
+            gard.style.opacity = 1;
+            typesOutput.value = "";
+        }
+    }
+    fritidshus.onclick = function () {
+        fritidshus2.checked = true;
+        fritidshus.style.opacity = 0.6;
+        radhus.style.opacity = 1;
+        villa.style.opacity = 1;
+        tomt.style.opacity = 1;
+        gard.style.opacity = 1;
+        skog.style.opacity = 1;
+        bostadsratt.style.opacity = 1;
+        typesOutput.value = "Fritidshus";
+        clickCounteFritidshus++
+        if (clickCounteFritidshus == 2) {
+            clickCounteFritidshus = 0;
+            fritidshus2.checked = false;
+            fritidshus.style.opacity = 1;
+            typesOutput.value = "";
+        }
+    }
+    bostadsratt.onclick = function () {
+        bostadsratt2.checked = true;
+        bostadsratt.style.opacity = 0.6;
+        radhus.style.opacity = 1;
+        fritidshus.style.opacity = 1;
+        tomt.style.opacity = 1;
+        gard.style.opacity = 1;
+        skog.style.opacity = 1;
+        villa.style.opacity = 1;
+        typesOutput.value = "Bostadsrätt";
+
+        clickCounteBostadsratt++
+        if (clickCounteBostadsratt == 2) {
+            clickCounteBostadsratt = 0;
+            bostadsratt2.checked = false;
+            typesOutput.value = "";
+            bostadsratt.style.opacity = 1;
+        }
+    }
+    tomt.onclick = function () {
+        tomt2.checked = true;
+        tomt.style.opacity = 0.6;
+        typesOutput.value = "Tomt";
+        radhus.style.opacity = 1;
+        fritidshus.style.opacity = 1;
+        bostadsratt.style.opacity = 1;
+        gard.style.opacity = 1;
+        skog.style.opacity = 1;
+        villa.style.opacity = 1;
+        clickCounteTomt++
+        if (clickCounteTomt == 2) {
+            clickCounteTomt = 0;
+            tomt2.checked = false;
+            tomt.style.opacity = 1;
+            typesOutput.value = "";
+        }
+    }
+
+
+
+
+    var rangeSlider = function () {
+        var slider = $('.range-slider'),
+            range = $('.range-slider__range'),
+            value = $('.range-slider__value');
+
+        slider.each(function () {
+
+            value.each(function () {
+                var value = $(this).prev().attr('value');
+                $(this).html(value + ' rum');
+            });
+
+            range.on('input', function () {
+                $(this).next(value).html(this.value + ' rum');
+            });
+        });
+    };
+
+    rangeSlider();
+
+
+    var rangeSlider2 = function () {
+        var slider = $('.range--slider'),
+            range = $('.range-slider_range'),
+            value = $('.range-slider_value');
+
+        slider.each(function () {
+
+            value.each(function () {
+                var value = $(this).prev().attr('value');
+                $(this).html(value + ' kr');
+            });
+
+            range.on('input', function () {
+         
+                $(this).next(value).html(this.value + ' kr')
+            });
+        });
+    };
+
+    rangeSlider2();
+
+</script>

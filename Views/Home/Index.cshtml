@@ -1,0 +1,293 @@
+﻿@model IEnumerable<project.Models.Homes>
+@{
+    ViewData["Title"] = "Startsidan";
+}
+
+<!--Return to current secion-->
+@if (ViewBag.Section != null)
+{
+    <script>
+        $(function () {
+                window.location.hash = '#@ViewBag.Section';
+
+        });
+    </script>
+}
+<div id="fullpage">
+    <div id="header" class="section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 high social">
+                    <ul>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                        </li>
+                        <li><i class="fab fa-facebook"></i></li>
+                    </ul>
+                </div>
+                <div class="col high main">
+                    <h1>Ekfeldt & Co</h1><h2>När du vill sälja, köpa eller värdera hus</h2>
+
+                </div>
+                <div class="col-sm-5 high">
+                    <img src="~/images/man.png" alt="En man" />
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section s1">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <h2>Senast inkomna objekt</h2>
+                <div class="carousel-item active">
+                    <div class="containers container-fluid">
+                        <div class="row">
+                            @{ int fill = 0; }
+                            @{ int fills = 0; }
+                            @foreach (var item in (IQueryable<project.Models.Homes>)ViewBag.firstThree)
+                            {
+                                var price = item.Price.ToString("C0", new System.Globalization.CultureInfo("sv-SE"));
+                                var area = item.GardenArea.ToString("# ### ### ###");
+                                fill++;
+
+                                    <div class="col-md-4 fill_@fill homesSection">
+                                        <a asp-action="Details" asp-route-id="@item.HomeId" asp-route-BrokerId="@item.BrokerId">
+                                            <img class="imagesInner" src="/images/@item.ImageAddress" alt="Bild på hus/bostadsrätt" /><div class="inner">
+                                                <h2>@Html.DisplayFor(modelItem => item.City)</h2><h3>@Html.DisplayFor(modelItem => item.Street)</h3><ul>
+                                                    <li> <i class="fas fa-home"></i> @Html.DisplayFor(modelItem => item.Type)</li>
+                                                    <li>
+                                                        <i class="fas fa-ruler-combined"></i>@Html.DisplayFor(modelItem => item.LivingArea) @if (item.BiArea != 0)
+                                                        {<p class="inline"> + </p> @Html.DisplayFor(modelItem => item.BiArea)}kvm
+                                                    </li>
+                                                    <li><i class="fas fa-tree"></i> @area kvm</li>
+                                                    <li><i class="fas fa-expand"></i> @Html.DisplayFor(modelItem => item.Room) rum</li>
+                                                </ul><h3>@price</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="containers container-fluid">
+                        <div class="row">
+                            @foreach (var item in (IQueryable<project.Models.Homes>)ViewBag.lastThree) {
+                                var price = item.Price.ToString("C0", new System.Globalization.CultureInfo("sv-SE"));
+                                var area = item.GardenArea.ToString("# ### ### ###");
+                                fills++;
+                                    <div class="col-md-4 fill_@fills homesSection">
+                                        <a asp-action="Details" asp-route-id="@item.HomeId" asp-route-BrokerId="@item.BrokerId">
+                                            <img class="imagesInner" src="/images/@item.ImageAddress" alt="Bild på hus/bostadsrätt" /><div class="inner">
+                                                <h2>@Html.DisplayFor(modelItem => item.City)</h2><h3>@Html.DisplayFor(modelItem => item.Street)</h3><ul>
+                                                    <li> <i class="fas fa-home"></i> @Html.DisplayFor(modelItem => item.Type)</li>
+                                                    <li>
+                                                        <i class="fas fa-ruler-combined"></i>@Html.DisplayFor(modelItem => item.LivingArea) @if (item.BiArea != 0)
+                                                        {<p class="inline"> + </p> @Html.DisplayFor(modelItem => item.BiArea)}kvm
+                                                    </li>
+                                                    <li><i class="fas fa-tree"></i> @area kvm</li>
+                                                    <li><i class="fas fa-expand"></i> @Html.DisplayFor(modelItem => item.Room) rum</li>
+                                                </ul><h3>@price</h3>
+                                            </div>
+                                        </a>   </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <div class="carousel-control-prev-icon orange" aria-hidden="true"></div>
+            <div class="sr-only">Previous</div>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <div class="carousel-control-next-icon orange" aria-hidden="true"></div>
+            <div class="sr-only">Next</div>
+        </a>
+    </div>
+
+    <div class="section s2" id="s2">
+        <div class="container">
+
+
+            <div class="row smallFix">
+                <div class="col align">
+                    <h2>Värdera din bostad</h2>
+                    <p>Värdera din bostad helt kostnadsfritt, vi återkommer inom 2 arbetsdagar!</p>
+                    <p>
+                        @ViewBag.msg
+
+                    </p>
+                    <form class="form form-horizontal form" method="post">
+                        <div asp-validation-summary="All"></div>
+                        <div class="row inline">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input name="Name" placeholder="Förnamn" class="form-control" />
+                                        <input type="hidden" name="Subject" class="form-control" value="Värdering" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row inline">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-12 ">
+                                        <input name="LastName" placeholder="Efternamn" class="form-control" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row inline">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input name="Street" placeholder="Gata" class="form-control" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row inline">
+                            <div class="col-md-12">
+                                <div class="form-group">
+
+                                    <div class="col-md-12">
+                                        <input name="City" placeholder="Stad " class="form-control" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row inline">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input name="PostalCode" placeholder="Postnummer" class="form-control" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row inline">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input name="Email" placeholder="Email" class="form-control" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit">Skicka</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col center">
+                    <h2>Tjänster</h2>
+                    <div class="row">
+                        <div class="col small">
+                            <img class="col-md-5" src="~/images/sofa.png" alt="Ikon på en soffa" />
+                            <h3>Homestyling</h3>
+                            <p>
+                                Löksås ipsum sjö är år färdväg björnbär på färdväg stora kom,
+                                varit på vidsträckt söka ser söka ser söka tre.
+                            </p>
+                        </div>
+                        <div class="col small">
+                            <img class="col-md-5" src="~/images/camera.png" alt="Ikon på en soffa" />
+                            <h3>Fotografering</h3>
+                            <p>
+                                Löksås ipsum sjö är år färdväg björnbär på färdväg stora kom,
+                                varit på vidsträckt söka ser söka ser söka tre.
+                            </p>
+                        </div>
+                        <div class="col small">
+                            <img class="col-md-5" src="~/images/plug.png" alt="Ikon på en soffa" />
+                            <h3>Energideklaration</h3>
+                            <p>
+                                Löksås ipsum sjö är år färdväg björnbär på färdväg stora kom,
+                                varit på vidsträckt söka ser söka ser söka tre.
+                            </p>
+                        </div>
+                        <div class="col small">
+                            <img class="col-md-5" src="~/images/law.png" alt="Ikon på en soffa" />
+                            <h3>Juridisk hjälp</h3>
+                            <p>
+                                Löksås ipsum sjö är år färdväg björnbär på färdväg stora kom,
+                                varit på vidsträckt söka ser söka ser söka tre.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid section s3" id="omoss">
+        <h2>Om oss</h2>
+        <p>
+            Löksås ipsum samtidigt därmed ser erfarenheter bland, regn sax faktor räv gamla,
+            träutensilierna icke hela se samtidigt. Händer denna dimmhöljd stig flera
+            redan samtidigt omfångsrik som, rännil gör sorgliga som ordningens söka nya, för där från har stig som och.
+        </p><br />
+            <div class="row brokers">
+
+
+                <div class="col broker deleteB">
+
+                </div>
+                @{var rem = 0; }
+                @foreach (var item in (List<Broker>)ViewBag.BrokerList)
+                {
+                    rem++;
+            <div class="col broker rem_@rem">
+                <img class="col" src="~/images/@item.Image" alt="@item.FirstName" />
+                <h2>@item.FirstName</h2>
+                <p>@item.Title</p>
+                <i>@item.Phonenumber</i>
+            </div>
+
+                }
+         
+
+                <div class="col deleteB">
+
+                </div>
+            </div>
+    </div>
+
+
+
+    <script>
+
+        new fullpage('#fullpage', {
+            navigationTooltips: ['Start', 'Objekt', 'Värdering', 'Om oss', 'Footer'],
+
+        });
+        $('.carousel').carousel()
+
+      
+        }
+
+    </script>
+
+    <script>
+        // SET IMAGES IN CORRECT ID
+        var images = document.getElementsByClassName("images2");
+        var listningimages = document.getElementsByClassName("images");
+
+        for (var i = 0; i < images.length; i++) {
+
+            var img = images[i].value;
+            listningimages[i].innerHTML = ' <img class="imagesInner" src="images/' + img + '" alt="Bild på hus/bostadsrätt" />';
+        }
+    </script>

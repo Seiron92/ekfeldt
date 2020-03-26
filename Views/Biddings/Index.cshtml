@@ -1,0 +1,119 @@
+﻿@model IEnumerable<project.Models.Bidding>
+
+@{
+    ViewData["Title"] = "Budgivningar";
+}
+
+
+<div class="section">
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 high social">
+                    <ul>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                        </li>
+                        <li><i class="fab fa-facebook"></i></li>
+                    </ul>
+                </div>
+                <div class="col high main">
+                    <h1>Budgivningar</h1>
+
+                </div>
+                <div class="col-sm-5 high">
+                    <img src="~/images/man.png" alt="En man" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container marginTop">
+    @{ foreach (var item in ViewBag.home)
+        {
+           <input type="hidden" value="@item" class="address" /> <br />
+        }
+    }
+
+    <p>
+        <a class="btn-primary" asp-action="Create">Skapa budgivning </a>
+    </p>
+
+
+    @foreach (var pers in (List<int>)ViewBag.sum)
+    {
+       <input type="hidden" value="@pers" class="sums" />
+    }
+        <table class="table">
+            <thead>
+                <tr>
+
+
+
+
+                    <th>Högsta bud</th>
+
+                    <th>
+                       Objektets adress
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+
+                @foreach (var item in Model)
+                {
+                <tr>
+
+
+
+                    <td class="highest">Det finns inga bud</td>
+
+
+
+
+                    <td class="addr"></td>
+                    <td>
+
+                        <a asp-action="BidderIndex"  asp-controller="Persons" asp-route-homeId="@item.HomeId">Se alla budgivare för detta objekt</a> |
+                        <a asp-action="CreateBidder" asp-controller="Persons" asp-route-homeId="@item.HomeId" asp-route-biddingId="@item.BiddingId">Lägg till budgivare</a> |
+                        <a asp-action="Delete" asp-route-id="@item.BiddingId" asp-route-homeId="@item.HomeId">Ta bort budgivning</a>
+                    </td>
+
+
+
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+<script src="~/js/menu.js"></script>
+
+<script>
+    var highest = document.getElementsByClassName("highest");
+    var sum = document.getElementsByClassName("sums");
+
+
+    for (var i = 0; i < sum.length; i++) {
+
+        highest[i].innerHTML = sum[i].value;
+    }
+
+        var address = document.getElementsByClassName("address");
+    var addr = document.getElementsByClassName("addr");
+
+    for (var i = 0; i < address.length; i++) {
+
+        addr[i].innerHTML = address[i].value;
+    }
+
+
+</script>

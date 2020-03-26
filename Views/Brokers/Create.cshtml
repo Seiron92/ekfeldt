@@ -1,0 +1,101 @@
+﻿@model project.ViewModels.BrokersViewModel
+
+@{
+    ViewData["Title"] = "Lägg till mäklare";
+}
+<div class="section">
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 high social">
+                    <ul>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                        </li>
+                        <li><i class="fab fa-facebook"></i></li>
+                    </ul>
+                </div>
+                <div class="col high main">
+                    <h1>Lägg till mäklare</h1>
+
+                </div>
+                <div class="col-sm-5 high">
+                    <img src="~/images/man.png" alt="En man" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="section fp-destroyed container marginTop imageFix adminfix">
+
+        <h4>Mäklare</h4>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <form asp-action="Create" enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Phonenumber" class="control-label"></label>
+                        <input asp-for="Phonenumber" class="form-control" />
+                        <span asp-validation-for="Phonenumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <h3>Bild</h3>
+                        <input id="imgInp" asp-for="Photo" />
+                        <label asp-for="Photo">Välj fil</label>
+                        <img id="displayImage" src="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Skapa" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Gå tillbaka</a>
+        </div>
+    </div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+    <script src="~/js/menu.js"></script>
+    <script>
+        // FOR IMAGE
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#displayImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //  $("#textbox").html('<div class="form-group"><label>Bildtext</label><input type="text" required name="ImageText2" /></div><input type="hidden" value="true" name="HeroImage2" />')
+            }
+        }
+        $("#imgInp").change(function () {
+            readURL(this);
+        });
+    </script>

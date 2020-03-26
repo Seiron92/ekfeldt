@@ -1,0 +1,155 @@
+﻿@model project.Models.Persons
+
+@{
+    ViewData["Title"] = "Lägg till budgivare";
+    var minVal = @ViewBag.high + 1;
+}
+
+<div class="section">
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 high social">
+                    <ul>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                        </li>
+                        <li><i class="fab fa-facebook"></i></li>
+                    </ul>
+                </div>
+                <div class="col high main">
+                    <h1>Lägg till budgivare</h1>
+
+                </div>
+                <div class="col-sm-5 high">
+                    <img src="~/images/man.png" alt="En man" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container marginTop">
+
+    <div class="row">
+        <div class="col-md-4">
+            @{
+                if (ViewBag.high != 0)
+                {
+                    <h4>Högsta bud: @ViewBag.high</h4>
+                }
+
+            }
+
+            <form asp-action="CreateBidder">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Amount" class="control-label"></label>
+                    <input type="number" asp-for="Amount" min="@minVal" class="form-control" />
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+                <p>Om budgivaren redan bjudit på objektet</p>
+                <select name="persons" id="target">
+                    <option value="0">Välj</option>
+                    @foreach (var pers in (List<Persons>)ViewBag.persons)
+                    {
+                        <option value="@pers.PersonId">@pers.FirstName</option>
+                    }
+                </select><br />
+                <div class="form-group hidden">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group hidden">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group hidden">
+                    <label asp-for="Street" class="control-label"></label>
+                    <input asp-for="Street" class="form-control" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+                <div class="form-group hidden">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group hidden">
+                    <label asp-for="PostalCode" class="control-label"></label>
+                    <input asp-for="PostalCode" class="form-control" />
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+
+
+                <input type="hidden" class="form-check-input" asp-for="Bidder" value="true" />
+
+
+
+                <input type="hidden" class="form-check-input" asp-for="Viewer" value="false" />
+
+
+                <div class="form-group hidden">
+                    <label asp-for="PhoneNUmber" class="control-label"></label>
+                    <input asp-for="PhoneNUmber" class="form-control" />
+                    <span asp-validation-for="PhoneNUmber" class="text-danger"></span>
+                </div>
+                <div class="form-group hidden">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <input type="hidden" asp-for="BiddingIds" value="@ViewBag.biddingId" class="form-control" />
+
+
+                <input type="hidden" asp-for="HomeId" class="form-control" value="@ViewBag.homeId" />
+
+                <div class="form-group form-check">
+
+                    <input class="form-check-input" type="hidden" value="false" asp-for="deleted" />
+
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Date" class="control-label"></label>
+                    <input type="date" asp-for="Date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Time" class="control-label"></label>
+                    <input type="time" asp-for="Time" class="form-control" />
+                    <span asp-validation-for="Time" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index" asp-controller="Biddings">Gå tillbaka</a>
+    </div>
+
+</div>
+
+<script src="~/js/menu.js"></script>
+<script>
+    var hidden = document.getElementsByClassName("hidden");
+    var target = document.getElementById("target");
+
+    $("#target").change(function () {
+        if (target.value != 0){
+            for (var i = 0; i < hidden.length; i++) {
+                hidden[i].style.display = "none";
+            }
+        } else {
+            for (var i = 0; i < hidden.length; i++) {
+                hidden[i].style.display = "block";
+            }
+            }
+       
+});
+</script>

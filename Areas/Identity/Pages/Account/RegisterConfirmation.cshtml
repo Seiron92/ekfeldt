@@ -1,0 +1,45 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+    <div class="section">
+        <div id="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-2 high social">
+                        <ul>
+                            <li>
+                                <i class="fab fa-instagram"></i>
+                            </li>
+                            <li><i class="fab fa-facebook"></i></li>
+                        </ul>
+                    </div>
+                    <div class="col high main">
+                        <h1>Ekfeldt & Co</h1><h2>När du vill sälja, köpa eller värdera hus</h2>
+
+                    </div>
+                    <div class="col-sm-5 high">
+                        <img src="~/images/man.png" alt="En man" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section container margin">
+       
+        @{
+            if (@Model.DisplayConfirmAccountLink)
+            {
+                <p>
+                  <a id="confirm-link" href="@Model.EmailConfirmationUrl">Klicka här för att bekräfta ditt konto</a>
+                </p>
+            }
+            else
+            {
+                <p>
+                    Please check your email to confirm your account.
+                </p>
+            }
+        }
+        </div>

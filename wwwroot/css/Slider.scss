@@ -1,0 +1,73 @@
+﻿$colors: (
+// DEKLARERA FLERA FÄRGER
+accent: #ee8a29, accent2: #fff);
+
+
+@function color($color-name) {
+
+    @return map-get($colors, $color-name);
+}
+
+.range-slider{
+    span {
+        background: none!important;
+    }
+}
+
+.range--slider {
+    span {
+        background: none!important;
+    }
+}
+
+input[type=range] {
+    height: 3px;
+    width: 80%;
+    background: #eee;
+    -webkit-appearance: color(accent);
+    color: color(accent);
+    -webkit-appearance: none;
+}
+input[type=range]:focus {
+    outline: none; 
+}
+input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+   
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    background: color(accent) !important;
+    cursor: pointer;
+    margin-top: 0px;
+    color: color(accent);
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+}
+
+
+input[type=range]::-moz-range-thumb {
+    background: color(accent);
+    cursor: pointer;
+    margin-top: -14px; 
+    border: none;
+    cursor: pointer;
+}
+
+
+input[type=range]::-ms-thumb {
+    background: color(accent);
+    cursor: pointer;
+    margin-top: -14px; 
+   
+    cursor: pointer;
+    border: none;
+}
+
+

@@ -1,0 +1,394 @@
+﻿@model project.Models.Homes
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+@foreach (var hero in (List<Image>)ViewBag.HeroImages)
+{
+    <style>
+        body{
+            overflow-x: hidden;
+        }
+        #header {
+            background-image: url("/images/@hero.ImageAdress");
+            background-size: cover;
+            height: 100vh;
+        }
+    </style>
+    <input type="hidden" id="bildadress" value=" @hero.ImageAdress" />
+}
+
+<div class="section">
+    <div id="header">
+    </div>
+</div>
+
+
+<div class="section container">
+    <!-- For pin on map-->
+    <input type="hidden" id="street" value=" @Model.Street" />
+    <input type="hidden" id="city" value=" @Model.City" />
+    <input type="hidden" id="postal" value=" @Model.PostalCode" />
+    <input type="hidden" id="typ" value=" @Model.Type" />
+    <input type="hidden" id="year" value=" @Model.BuildningYear" />
+    <input type="hidden" id="tax" value=" @Model.TaxValue" />
+    <input type="hidden" id="drift" value=" @Model.OperationCost" />
+    <input type="hidden" id="manadsavgift" value=" @Model.MounthlyFee" />
+    <input type="hidden" id="boarea" value=" @Model.LivingArea" />
+    <input type="hidden" id="price" value=" @Model.Price" />
+    <input type="hidden" id="room" value=" @Model.Room" />
+    <input type="hidden" id="biarea" value=" @Model.BiArea" />
+    <input type="hidden" id="garden" value=" @Model.GardenArea" />
+    <input type="hidden" id="long" value="" />
+    <input type="hidden" id="lat" value="" />
+    <input type="hidden" id="address" value=" @Model.Street,  @Model.PostalCode @Model.City" />
+    <!--Internal navigation menu-->
+
+
+    <div class="container oversikt" id="oversikt">
+        <h1>@Model.Street, @Model.City</h1>
+        <div class="row">
+
+            <div class="col">
+                <ul>
+                    <li><b>Typ:</b> @Model.Type</li>
+                    <li><b>Rum:</b> @Model.Room</li>
+                    <li><b>Boarea:</b> @Model.LivingArea kvm</li>
+                    @{if (@Model.BiArea != 0)
+                        {
+                            <li><b>Biarea:</b> @Model.BiArea kvm</li>
+                        } }
+                    @{ var area = Model.GardenArea.ToString("# ### ### ###"); }
+                    @{if (@Model.GardenArea != 0)
+                        {
+                            <li><b>Tomtarea:</b> @area kvm</li>
+                        } }
+                    @{if (@Model.AppartmentNumber != null)
+                        {
+                            <li><b>Lägenhetsnummer:</b> @Model.AppartmentNumber</li>
+                        } }
+                </ul>
+            </div>
+            <div class="col">
+                <ul>
+                    <li><b>Byggnadsår:</b> @Model.BuildningYear</li>
+                    @{var OperationCost = @Model.OperationCost.ToString("C0", new System.Globalization.CultureInfo("sv-SE")); }
+                    <li><b>Driftskostnad:</b> @OperationCost</li>
+                    @{var MounthlyFee = @Model.MounthlyFee.ToString("C0", new System.Globalization.CultureInfo("sv-SE")); }
+                    @{if (@Model.MounthlyFee != 0)
+                        {
+
+                            <li><b>Månadsavgift:</b> @MounthlyFee </li>
+                        } }
+                    <li><b>Upplåtelseform:</b> @Model.Tow</li>
+                    @{if (@Model.Elevator != null)
+                        {
+                            <li><b>Hiss:</b> @Model.Elevator</li>
+                        } }
+                    @{var price = @Model.Price.ToString("C0", new System.Globalization.CultureInfo("sv-SE")); }
+                    <li><b>Pris:</b> @price </li>
+
+
+                </ul>
+            </div>
+            <!--Brokers area-->
+            <div class="col broker">
+                <h3>Mäklare</h3>
+                @foreach (var item in (List<Broker>)ViewBag.BrokerList)
+                {
+                    <img src="~/images/@item.Image" alt="@item.fullname"/><br />
+                    <b>@item.FirstName</b>
+                    <div class="padd">
+                        <p>@item.Phonenumber</p>
+                        <p><a href="mailto: @item.Email">@item.Email</a></p>
+                    </div>
+                }
+            </div>
+        </div>
+        <!--Summary-->
+        <div class="row up">
+
+          
+            <div class="col">
+
+                <h2>@Model.SummaryHeading</h2>
+                <p>@Model.Summary</p>
+                <a class="button" asp-action="Edit" asp-route-id="@Model.HomeId">Ändra</a>
+                <a class="button delete" asp-action="Delete" asp-route-id="@Model.HomeId">Radera</a>
+            </div>
+            <p id="fakta"></p>
+        </div>
+    </div>
+    <div class="container whitebk oversikt">
+        <h2 class="center">Fakta</h2>
+        <div class="row">
+
+            <div class="col">
+                <h3>Allmänt</h3>
+                <ul>
+                    <li><b>Typ:</b> @Model.Type</li>
+                    <li><b>Rum:</b> @Model.Room</li>
+                    <li><b>Boarea:</b> @Model.LivingArea kvm</li>
+                    @{if (@Model.BiArea != 0)
+                        {
+                            <li><b>Biarea:</b> @Model.BiArea kvm</li>
+                        } }
+                    @{if (@Model.GardenArea != 0)
+                        {
+
+                            <li><b>Tomtarea:</b> @area kvm</li>
+                        } }
+                    @{if (@Model.AppartmentNumber != null)
+                        {
+                            <li><b>Lägenhetsnummer:</b> @Model.AppartmentNumber</li>
+                        } }
+                    <li><b>Byggnadsår:</b> @Model.BuildningYear</li>
+
+                    <li><b>Driftskostnad:</b> @OperationCost </li>
+
+                    @{if (@Model.MounthlyFee != 0)
+                        {
+
+                            <li><b>Månadsavgift:</b> @MounthlyFee </li>
+                        } }
+                    <li><b>Upplåtelseform:</b> @Model.Tow</li>
+                    @{if (@Model.Elevator != null)
+                        {
+                            <li><b>Hiss:</b> @Model.Elevator</li>
+                        } }
+                    <li><b>Pris:</b> @price </li>
+                    @{if (@Model.LivingSpaceComment != null)
+                        {
+                            <li><b>Kommentarer:</b> @Model.LivingSpaceComment</li>
+                        } }
+                </ul>
+            </div>
+            <div class="col">
+                <h3>Byggnaden</h3>
+                <ul>
+                    @{if (@Model.TypeCode != null)
+                        {
+                            <li><b>Typkod:</b> @Model.TypeCode</li>
+                        } }
+                    @{if (@Model.Dop != null)
+                        {
+                            <li><b>Fastighetsbeteckning:</b> @Model.Dop</li>
+                        } }
+                    @{if (@Model.BuildningSystem != null)
+                        {
+                            <li><b>Byggnadssätt:</b> @Model.BuildningSystem</li>
+                        } }
+                    @{if (@Model.Renovations != null)
+                        {
+                            <li><b>Renoveringar:</b> @Model.Renovations</li>
+                        } }
+                    @{if (@Model.OtherBuildnings != null)
+                        {
+                            <li><b>Övriga Byggnader:</b> @Model.OtherBuildnings</li>
+                        } }
+                    @{if (@Model.CommonAreas != null)
+                        {
+                            <li><b>Gemensamma utrymmen:</b> @Model.CommonAreas</li>
+                        } }
+                    @{if (@Model.Parking != null)
+                        {
+                            <li><b>Parkering:</b> @Model.Parking</li>
+                        } }
+                    <li><b>Värme och ventilation:</b> @Model.HeatVentilation</li>
+                    <li><b>TV och internet:</b> @Model.TvInternet</li>
+
+
+                </ul>
+
+            </div>
+            <div class="col">
+                <h3>Ekonomi</h3>
+                <ul>
+                    @{var TransactionFee = @Model.TransactionFee.ToString("C0", new System.Globalization.CultureInfo("sv-SE")); }
+                    @{if (@Model.TransactionFee != 0)
+                        {
+
+                            <li><b>Överlåtelseavgift:</b> @TransactionFee </li>
+                        } }
+                    @{if (@Model.TransactionFeePaidBy != null)
+                        {
+                            <li><b>Överlåtelseavgift betalas av:</b> @Model.TransactionFeePaidBy</li>
+                        } }
+                    @{if (@Model.PawnBroking != false)
+                        {
+                            <li><b>Pantsättning:</b> @Model.PawnBroking</li>
+                        } }
+
+                    @{if (@Model.OperationCost != 0)
+                        {
+                            <li><b>Driftskostnad:</b> @OperationCost</li>
+                        } }
+                    @{var TaxValue = @Model.TaxValue.ToString("C0", new System.Globalization.CultureInfo("sv-SE")); }
+                    @{if (@Model.TaxValue != 0)
+                        {
+
+                            <li><b>Taxeringsvärde:</b> @TaxValue </li>
+                        } }
+                    @{var TaxValueProperty = @Model.TaxValueProperty.ToString("C0", new System.Globalization.CultureInfo("sv-SE")); }
+                    @{if (@Model.TaxValueProperty != 0)
+                        {
+
+                            <li><b>Taxeringsvärde byggnad:</b> @TaxValueProperty </li>
+                        } }
+                    @{var TaxValueLand = @Model.TaxValueLand.ToString("C0", new System.Globalization.CultureInfo("sv-SE")); }
+                    @{if (@Model.TaxValueLand != 0)
+                        {
+
+                            <li><b>Taxeringsvärde mark:</b> @TaxValueLand</li>
+                        } }
+                    @{if (@Model.TaxYear != 0)
+                        {
+                            <li><b>Taxeringsår:</b> @Model.TaxYear</li>
+                        } }
+                    @{if (@Model.PawnLetters != null)
+                        {
+                            <li><b>Pantbrev:</b> @Model.PawnLetters</li>
+                        } }
+                    @{var Heating = @Model.Heating.ToString("C0", new System.Globalization.CultureInfo("sv-SE")); }
+                    @{if (@Model.Heating != 0)
+                        {
+
+                            <li><b>Uppvärmningskostnad:</b> @Heating </li>
+                        } }
+                    @{if (@Model.PowerComsumption != 0)
+                        {
+                            <li><b>Elförbrukning:</b> @Model.PowerComsumption kwh/år</li>
+                        } }
+                    @{var EnergyCosts = @Model.EnergyCosts.ToString("C0", new System.Globalization.CultureInfo("sv-SE")); }
+                    @{if (@Model.EnergyCosts != 0)
+                        {
+
+                            <li><b>Elkostnad:</b> @EnergyCosts/år</li>
+                        } }
+                    @{if (@Model.NumberOfOccupants != 0)
+                        {
+                            <li><b>Antal personer i hushållet:</b> @Model.NumberOfOccupants</li>
+                        } }
+                    @{var Cleaning = @Model.Cleaning.ToString("C0", new System.Globalization.CultureInfo("sv-SE")); }
+                    @{if (@Model.Cleaning != 0)
+                        {
+                            <li><b>Renhållning:</b> @Cleaning/år</li>
+                        } }
+                    @{var Insurance = @Model.Insurance.ToString("C0", new System.Globalization.CultureInfo("sv-SE")); }
+                    @{if (@Model.Insurance != 0)
+                        {
+                            {
+                                <li><b>Försäkringskostnader:</b> @Insurance/år</li>
+                            }
+                        } }
+                    @{if (@Model.InsuranceComment != null)
+                        {
+                            <li><b>Försäkringskommentar:</b> @Model.InsuranceComment</li>
+                        } }
+
+                </ul>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                @{if (@Model.EnergyDeclaration != false)
+                    {
+                        <h3 class="center">Energideklaration</h3>
+                        <ul>
+
+                            <li><b>Energiprestanda:</b> @Model.EnergyPerfomance</li>
+                            <li><b>Energiklass:</b> @Model.EnergyClass</li>
+                            <li><b>Specifik energianvändning:</b> @Model.SpecificEnergyUsage</li>
+                            <li><b>Deklarationsdatum:</b> @Model.DeclarationDate</li>
+                            <li><b>Deklaration utförd av:</b> @Model.Inspector</li>
+
+                        </ul>
+                    } }
+                @{if (@Model.AboutSociety != null)
+                    {
+                        <h3 class="center">Om föreningen</h3>
+                        <pre class="replace"> @Model.AboutSociety</pre>
+                    } }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h2 class="center">Information</h2>
+                <pre class="replace"> @Model.Information</pre>
+            </div>
+            <p id="bilder"></p>
+        </div>
+
+    </div>
+    <hr />
+
+
+    <!--Images-->
+    <!--Hero Images-->
+
+
+    <div class="row"><h2 class="center">Hero-bild</h2></div>
+
+    @foreach (var imge in (List<Image>)ViewBag.HeroImages)
+    {<div class="row">
+            <div class="col detImg">
+                <img src="~/images/@imge.ImageAdress" alt="@imge.ImageText" />
+                <div class="output"><p> Bildtext: @imge.ImageText</p><a asp-action="Edit" asp-controller="Images" asp-route-BrokerId="@ViewBag.BrokId" asp-route-id="@imge.ImageId">Ändra</a></div>
+
+                <hr />
+            </div>
+        </div>
+    }
+
+
+
+
+    <!--Regular images-->
+    @foreach (var imgs in (List<Image>)ViewBag.HomeImg)
+    {<div class="row">
+            <div class="col detImg">
+                <img src="~/images/@imgs.ImageAdress" alt="@imgs.ImageText" />
+                <div class="output"><p> Bildtext: @imgs.ImageText</p><a asp-action="Edit" asp-controller="Images" asp-route-BrokerId="@ViewBag.BrokId" asp-route-id="@imgs.ImageId">Ändra</a> | <a asp-action="Delete" asp-controller="Images" asp-route-BrokerId="@ViewBag.BrokId" asp-route-id="@imgs.ImageId">Radera</a></div>
+                <hr />
+            </div>
+        </div>
+    }
+
+
+    <div id="planritning" class="row"><h2 class="center">Planritning</h2></div>
+
+
+    @foreach (var imga in (List<Image>)ViewBag.Planritning)
+    {<div class="row">
+         <div class="col detImg">
+             <img src="~/images/@imga.ImageAdress" alt="@imga.ImageText" />
+             <div class="output"><p> Bildtext: @imga.ImageText</p><a asp-action="Edit" asp-controller="Images" asp-route-BrokerId="@ViewBag.BrokId" asp-route-id="@imga.ImageId">Ändra</a> | <a asp-action="Delete" asp-controller="Images" asp-route-BrokerId="@ViewBag.BrokId" asp-route-id="@imga.ImageId">Radera</a></div>
+             <hr />
+         </div>
+        </div>
+    }
+
+    <a asp-action="Index">Gå tillbaka till listan</a>
+</div>
+
+<script src="~/js/menu.js"></script>
+
+<script>
+    // Convert special characters
+    var replaceIt = document.getElementsByClassName("replace");
+
+    for (var i = 0; i < replaceIt.length; i++) {
+        var content = replaceIt[i].textContent;
+        replaceIt[i].innerHTML = content;
+    }
+
+
+
+
+
+</script>

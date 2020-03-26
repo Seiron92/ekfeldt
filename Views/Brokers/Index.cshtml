@@ -1,0 +1,57 @@
+﻿@model IEnumerable<project.Models.Broker>
+
+@{
+    ViewData["Title"] = "Mäklare";
+}
+<div class="section">
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 high social">
+                    <ul>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                        </li>
+                        <li><i class="fab fa-facebook"></i></li>
+                    </ul>
+                </div>
+                <div class="col high main">
+                    <h1>Mäklare</h1>
+
+                </div>
+                <div class="col-sm-5 high">
+                    <img src="~/images/man.png" alt="En man" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container marginTop">
+
+
+    <p>
+        <a class="btn-primary" asp-action="Create">Lägg till mäklare </a>
+    </p>
+
+    <div class="row table" id="listnings">
+
+        @foreach (var item in Model)
+        {
+            <div class="homesSection2">
+                    <img class="imagesInner" src="/images/@item.Image" alt="Bild på @item.fullname" /><div class="inner">
+                        <h2>@Html.DisplayFor(modelItem => item.fullname) </h2>
+                        <p>@item.Phonenumber</p>
+                        <p><a href="mailto: @item.Email">@item.Email</a></p>
+                        <a class="button" asp-action="Edit" asp-route-id="@item.BrokerId">Ändra</a>
+                        <a class="button delete" asp-action="Delete" asp-route-id="@item.BrokerId">Radera</a>
+                    </div>
+            </div>
+        }
+
+
+    </div>
+</div>
+
+
+<script src="~/js/menu.js"></script>

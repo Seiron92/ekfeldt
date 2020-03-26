@@ -1,0 +1,57 @@
+﻿@model project.Models.Broker
+
+@{
+    ViewData["Title"] = "Radera mäklare";
+}
+
+<div class="section">
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 high social">
+                    <ul>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                        </li>
+                        <li><i class="fab fa-facebook"></i></li>
+                    </ul>
+                </div>
+                <div class="col high main">
+                    <h1>Radera mäklare</h1>
+
+                </div>
+                <div class="col-sm-5 high">
+                    <img src="~/images/man.png" alt="En man" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container marginTop">
+
+    <h3>Är du säker på att du vill radera denna mäklare?</h3>
+
+ 
+    
+    <div class="row">
+  
+        <div class="col">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="BrokerId" />
+                <input type="submit" value="Radera" class="btn btn-danger" /> |
+                <a asp-action="Index">Gå tillbaka till listan</a>
+            </form>
+            <div class="homesSection3">
+                <img class="imagesInner" src="/images/@Model.Image" alt="Bild på @Model.fullname" /><div class="inner">
+                    <h2>@Model.fullname </h2>
+                    <p>@Model.Phonenumber</p>
+                    <p><a href="mailto: @Model.Email">@Model.Email</a></p>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div></div>
+    <script src="~/js/menu.js"></script>

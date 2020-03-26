@@ -1,0 +1,77 @@
+﻿@model IEnumerable<project.Models.Homes>
+
+@{
+    ViewData["Title"] = "Objekt";
+}
+<div class="wrapp">
+    <div class="section">
+        <div id="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-2 high social">
+                        <ul>
+                            <li>
+                                <i class="fab fa-instagram"></i>
+                            </li>
+                            <li><i class="fab fa-facebook"></i></li>
+                        </ul>
+                    </div>
+                    <div class="col high main">
+                        <h1>Ekfeldt & Co</h1><h2>När du vill sälja, köpa eller värdera hus</h2>
+
+                    </div>
+                    <div class="col-sm-5 high">
+                        <img src="~/images/man.png" alt="En man" />
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scrollContainer marginTop">
+        <p>
+            <a class="btn-primary" asp-action="Create">Lägg till objekt</a>
+        </p>
+
+
+
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                if (item.deleted != true)
+                {
+                  
+
+
+                    var price = item.Price.ToString("C0", new System.Globalization.CultureInfo("sv-SE"));
+                    var area = item.GardenArea.ToString("# ### ### ###");
+            <div class="homesSection margin">
+                <a asp-action="Details" asp-route-id="@item.HomeId" asp-route-BrokerId="@item.BrokerId">
+                    <img class="imagesInner" src="/images/@item.ImageAddress" alt="Bild på hus/bostadsrätt" /><div class="inner">
+                        <h2>@Html.DisplayFor(modelItem => item.City)</h2><h3>@Html.DisplayFor(modelItem => item.Street)</h3><ul>
+                            <li> <i class="fas fa-home"></i> @Html.DisplayFor(modelItem => item.Type)</li>
+                            <li>
+                                <i class="fas fa-ruler-combined"></i>@Html.DisplayFor(modelItem => item.LivingArea) @if (item.BiArea != 0)
+                                {<p class="inline"> + </p> @Html.DisplayFor(modelItem => item.BiArea)}kvm
+                            </li>
+                            <li><i class="fas fa-tree"></i> @area kvm</li>
+                            <li><i class="fas fa-expand"></i> @Html.DisplayFor(modelItem => item.Room) rum</li>
+                        </ul><h3>@price</h3>
+                    </div>
+                </a><a asp-action="Details" asp-route-BrokerId="@item.BrokerId" asp-route-id="@item.HomeId">Ändra</a> | <a asp-action="Create" asp-controller="Demonstrations" asp-route-BrokerId="@item.BrokerId" asp-route-id="@item.HomeId">Lägg till visning</a>  <a asp-action="Create" asp-controller="Biddings" asp-route-BrokerId="@item.BrokerId" asp-route-id="@item.HomeId">Lägg till budgivning</a> | <a asp-action="Delete" asp-route-BrokerId="@item.BrokerId" asp-route-id="@item.HomeId">Radera objekt</a>
+            </div>
+                }
+            }
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<script src="~/js/menu.js"></script>
+
