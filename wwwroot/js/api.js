@@ -9,7 +9,6 @@ var minroomput = document.getElementById("minroomput");
 
 
 var listnings = document.getElementById("listnings"); // listnings output for all or specific homes
-alert("hh")
 
 function homes(list) {
 
