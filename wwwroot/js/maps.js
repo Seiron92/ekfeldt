@@ -24,7 +24,7 @@ function coordinates(list) {
             credentials: 'AgJc-CFgzRtz_dfIVjSLmkTBKDWcd3CNCZjJHJPOyiz4H77kh4bih7cA0FQKcVds',
             center: new Microsoft.Maps.Location(longitude, latitude),
           
-            zoom: 4,
+            zoom: 15,
             showBreadcrumb: true,
             enableSearchLogo: false,
             enableClickableLogo: false,
