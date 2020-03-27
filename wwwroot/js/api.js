@@ -9,7 +9,7 @@ var minroomput = document.getElementById("minroomput");
 
 
 var listnings = document.getElementById("listnings"); // listnings output for all or specific homes
-
+alert("hh")
 
 function homes(list) {
 
@@ -17,14 +17,14 @@ function homes(list) {
             listnings.innerHTML = ""; // make listnings empty
 
         for (var i = 0; i < list.length; i++) {
-
+    
             if (list[i].deleted != true && list[i].type == typesOutput.value && district.value == "" && list[i].price >= minPrice.value && list[i].price <= maxPrice.value && list[i].room >= minRoom.value && list[i].room <= maxRoom.value) {
-
+                var bids = list[i].bidding;
                 listnings.innerHTML += `
             <div class="homesSection">
                 <a target="_blank" href="/Home/Details/${list[i].homeId}?BrokerId=${list[i].brokerId}">
      
-                       <img class="imagesInner" src="/images/${list[i].imageAddress}" alt="Bild på hus/bostadsrätt" /><div class="inner">
+                       <img class="imagesInner" src="/images/${list[i].imageAddress}" alt="Bild på hus/bostadsrätt" /><div class="bids">${bids}</div><div class="inner">
                         <h2>${list[i].city}</h3><ul>
                             <li> <i class="fas fa-home"></i> ${list[i].type}</li>
                             <li>
@@ -37,16 +37,25 @@ function homes(list) {
                     </div>
                 </a>
             </div>`;
-             
+                var bidstrue = document.getElementsByClassName("bids");
+            
+                if (bidstrue[i].innerHTML == "true") {
+                    bidstrue[i].innerHTML = "<div class='bidding'>Budgiving pågår</div>";
+                }
+                    else {
+                            bidstrue[i].innerHTML = "";
+                        }
+                
+
             }
             else if (list[i].deleted != true && typesOutput.value == "" && district.value == list[i].county && list[i].price >= minPrice.value && list[i].price <= maxPrice.value && list[i].room >= minRoom.value && list[i].room <= maxRoom.value) {
 
                 listnings.innerHTML += `
-            <div class="homesSection">
+             <div class="homesSection">
                 <a target="_blank" href="/Home/Details/${list[i].homeId}?BrokerId=${list[i].brokerId}">
      
-                       <img class="imagesInner" src="/images/${list[i].imageAddress}" alt="Bild på hus/bostadsrätt" /><div class="inner">
-                        <h2>${list[i].city}</h2><h3>${list[i].street}</h3><ul>
+                       <img class="imagesInner" src="/images/${list[i].imageAddress}" alt="Bild på hus/bostadsrätt" /><div class="bids">${bids}</div><div class="inner">
+                        <h2>${list[i].city}</h3><ul>
                             <li> <i class="fas fa-home"></i> ${list[i].type}</li>
                             <li>
                                 <i class="fas fa-ruler-combined"></i> ${list[i].livingArea}
@@ -58,16 +67,24 @@ function homes(list) {
                     </div>
                 </a>
             </div>`;
+                var bidstrue = document.getElementsByClassName("bids");
+
+                if (bidstrue[i].innerHTML == "true") {
+                    bidstrue[i].innerHTML = "<div class='bidding'>Budgiving pågår</div>";
+                }
+                else {
+                    bidstrue[i].innerHTML = "";
+                }
             
             }
             else if (list[i].deleted != true && list[i].type == typesOutput.value && list[i].county == district.value && list[i].price >= minPrice.value && list[i].price <= maxPrice.value && list[i].room >= minRoom.value && list[i].room <= maxRoom.value) {
 
                 listnings.innerHTML += `
-            <div class="homesSection">
+             <div class="homesSection">
                 <a target="_blank" href="/Home/Details/${list[i].homeId}?BrokerId=${list[i].brokerId}">
      
-                       <img class="imagesInner" src="/images/${list[i].imageAddress}" alt="Bild på hus/bostadsrätt" /><div class="inner">
-                        <h2>${list[i].city}</h2><h3>${list[i].street}</h3><ul>
+                       <img class="imagesInner" src="/images/${list[i].imageAddress}" alt="Bild på hus/bostadsrätt" /><div class="bids">${bids}</div><div class="inner">
+                        <h2>${list[i].city}</h3><ul>
                             <li> <i class="fas fa-home"></i> ${list[i].type}</li>
                             <li>
                                 <i class="fas fa-ruler-combined"></i> ${list[i].livingArea}
@@ -79,18 +96,24 @@ function homes(list) {
                     </div>
                 </a>
             </div>`;
-
-             
+                var bidstrue = document.getElementsByClassName("bids");
+            
+                if (bidstrue[i].innerHTML == "true") {
+                    bidstrue[i].innerHTML = "<div class='bidding'>Budgiving pågår</div>";
+                }
+                    else {
+                            bidstrue[i].innerHTML = "";
+                        }
             }
 
             else if (list[i].deleted != true && typesOutput.value == "" && district.value == "" && list[i].price >= minPrice.value && list[i].price <= maxPrice.value && list[i].room >= minRoom.value && list[i].room <= maxRoom.value) {
 
                 listnings.innerHTML += `
-            <div class="homesSection">
+             <div class="homesSection">
                 <a target="_blank" href="/Home/Details/${list[i].homeId}?BrokerId=${list[i].brokerId}">
      
-                       <img class="imagesInner" src="/images/${list[i].imageAddress}" alt="Bild på hus/bostadsrätt" /><div class="inner">
-                        <h2>${list[i].city}</h2><h3>${list[i].street}</h3><ul>
+                       <img class="imagesInner" src="/images/${list[i].imageAddress}" alt="Bild på hus/bostadsrätt" /><div class="bids">${bids}</div><div class="inner">
+                        <h2>${list[i].city}</h3><ul>
                             <li> <i class="fas fa-home"></i> ${list[i].type}</li>
                             <li>
                                 <i class="fas fa-ruler-combined"></i> ${list[i].livingArea}
@@ -102,8 +125,14 @@ function homes(list) {
                     </div>
                 </a>
             </div>`;
-           
-            }
+                var bidstrue = document.getElementsByClassName("bids");
+
+                if (bidstrue[i].innerHTML == "true") {
+                    bidstrue[i].innerHTML = "<div class='bidding'>Budgiving pågår</div>";
+                }
+                else {
+                    bidstrue[i].innerHTML = "";
+                }
 
      
         }
