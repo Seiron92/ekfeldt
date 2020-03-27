@@ -1,29 +1,30 @@
-﻿@model project.Models.Homes
+﻿            zoom: 15,
+@model project.Models.Homes
 
 @{
     ViewData["Title"] = "Radera";
 }
-    <div class="section">
-        <div id="header">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-2 high social">
+<div class="section">
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 high social">
 
-                    </div>
-                    <div class="col high main">
-                        <h1>Radera hus</h1>
-                        <h2>
-                            @Model.Street, @Model.City
-                        </h2>
+                </div>
+                <div class="col high main">
+                    <h1>Radera hus</h1>
+                    <h2>
+                        @Model.Street, @Model.City
+                    </h2>
 
-                    </div>
-                    <div class="col-sm-5 high">
+                </div>
+                <div class="col-sm-5 high">
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @foreach (var hero in (List<Image>)ViewBag.HeroImages)
 {
     <style>
@@ -34,7 +35,7 @@
             height: 96vh;
         }
     </style>
-  
+
 }
 
 
@@ -69,7 +70,7 @@
     <input type="hidden" id="long" value="" />
     <input type="hidden" id="lat" value="" />
     <input type="hidden" id="address" value=" @Model.Street,  @Model.PostalCode @Model.City" />
-   
+
 
     <div class="container oversikt" id="oversikt">
         <div class="row whitebk">
@@ -79,7 +80,7 @@
                 <h3>Är du säker på att du vill radera detta hem?</h3>
                 <form asp-action="Delete">
                     <input type="hidden" asp-for="HomeId" />
-                    <input type="submit" value="Radera" class="btn btn-danger" /> 
+                    <input type="submit" value="Radera" class="btn btn-danger" />
                     <a asp-action="Index">Gå tillbaka</a>
                 </form>
             </div>
@@ -355,9 +356,9 @@
             <p id="bilder"></p>
         </div>
 
-   
-</div>
+
     </div>
+</div>
  ¨¨
 
 
@@ -366,8 +367,8 @@
     var replaceIt = document.getElementsByClassName("replace");
 
     for (var i = 0; i < replaceIt.length; i++) {
-    var content = replaceIt[i].textContent;
-    replaceIt[i].innerHTML = content;
+        var content = replaceIt[i].textContent;
+        replaceIt[i].innerHTML = content;
     }
 
     window.onscroll = function () { myFunction() };
@@ -378,12 +379,12 @@
 
 
     function myFunction() {
-    if (window.pageYOffset >= 10) {
-    mnu.style.background = "#fff";
-    } else {
+        if (window.pageYOffset >= 10) {
+            mnu.style.background = "#fff";
+        } else {
 
-    mnu.style.background = "transparent";
-    }
+            mnu.style.background = "transparent";
+        }
 
     }
 
