@@ -3,13 +3,15 @@
 @{
     ViewData["Title"] = "Details";
 }
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AgJc-CFgzRtz_dfIVjSLmkTBKDWcd3CNCZjJHJPOyiz4H77kh4bih7cA0FQKcVds' async defer></script>
+<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AgJc-CFgzRtz_dfIVjSLmkTBKDWcd3CNCZjJHJPOyiz4H77kh4bih7cA0FQKcVds' async defer></script>
 @foreach (var hero in (List<string>)ViewBag.HeroImages)
 {
     <style>
-        body{
-            overflow-x: hidden;
+        body {
+            overflow: auto;
+            overflow: initial;
         }
+    
         #header {
             background-image: url("/images/@hero");
 width: 100%;
@@ -133,7 +135,7 @@ height: 100vh;
                         <b>@item.FirstName</b>
                         <div class="padd">
                             <p>@item.Phonenumber</p>
-                            <p><a href="mailto: @item.Email">@item.Email</a></p>
+                            <p><a href="mailto:@item.Email">@item.Email</a></p>
                         </div>
                     }
                     @{ if (Model.Bidding == true)
@@ -160,7 +162,7 @@ height: 100vh;
 
                                         }
 
-                                        <div onclick="historyClose()" id="history">Dölj budhistorik</div>
+                                        <div onclick="historyClose()">Dölj budhistorik</div>
                                     </div>
                                 </div>
                             </div>
@@ -551,39 +553,24 @@ height: 100vh;
 
 
 
-<script src="~/js/maps.js"></script>
-<script src="~/js/financing.js"></script>
 
+<script src="~/js/financing.js"></script>
+<script src="~/js/maps.js"></script>
 
 
 
 
 <script>
-
-        //Sticky inner menu
-    
-    window.onscroll = function () { myFunction() };
-
+    //Sticky inner menu
     var navbar = document.getElementById("innermenu");
     var mnu = document.getElementById("menu");
+    var container = document.getElementsByClassName("container");
 
-    var sticky = navbar.offsetTop;
 
-    function myFunction() {
-        if (window.pageYOffset >= 10) {
-            mnu.style.background = "#fff";
-        } else {
 
-            mnu.style.background = "transparent";
-        }
 
-        if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky")
-        } else {
-            navbar.classList.remove("sticky");
-        }
-    }
-
+    mnu.style.background = "#fff";
+    navbar.classList.add("sticky")
 
 
     // Convert special characters
@@ -595,9 +582,6 @@ height: 100vh;
     }
 
 
-</script>
-
-<script>
     // SHOW BIDDING HISTORY
 
     var hideBids = document.getElementById("hideBids");
