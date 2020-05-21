@@ -13,12 +13,19 @@ var listnings = document.getElementById("listnings"); // listnings output for al
 function homes(list) {
 
     filter.onclick = function () {
-            listnings.innerHTML = ""; // make listnings empty
+        listnings.innerHTML = ""; // make listnings empty
 
         for (var i = 0; i < list.length; i++) {
-    
+            var bids = list[i].bidding;
+            if (bids == true) {
+                bids = "<div class='bidding'>Budgiving pågår</div>";
+            } else {
+                bids = "";
+            }
             if (list[i].deleted != true && list[i].type == typesOutput.value && district.value == "" && list[i].price >= minPrice.value && list[i].price <= maxPrice.value && list[i].room >= minRoom.value && list[i].room <= maxRoom.value) {
-                var bids = list[i].bidding;
+              
+      
+
                 listnings.innerHTML += `
             <div class="homesSection">
                 <a target="_blank" href="/Home/Details/${list[i].homeId}?BrokerId=${list[i].brokerId}">
@@ -36,19 +43,11 @@ function homes(list) {
                     </div>
                 </a>
             </div>`;
-                var bidstrue = document.getElementsByClassName("bids");
-            
-                if (bidstrue[i].innerHTML == "true") {
-                    bidstrue[i].innerHTML = "<div class='bidding'>Budgiving pågår</div>";
-                }
-                    else {
-                            bidstrue[i].innerHTML = "";
-                        }
-                
-
+              
+       
             }
             else if (list[i].deleted != true && typesOutput.value == "" && district.value == list[i].county && list[i].price >= minPrice.value && list[i].price <= maxPrice.value && list[i].room >= minRoom.value && list[i].room <= maxRoom.value) {
-
+    
                 listnings.innerHTML += `
              <div class="homesSection">
                 <a target="_blank" href="/Home/Details/${list[i].homeId}?BrokerId=${list[i].brokerId}">
@@ -66,15 +65,8 @@ function homes(list) {
                     </div>
                 </a>
             </div>`;
-                var bidstrue = document.getElementsByClassName("bids");
+  
 
-                if (bidstrue[i].innerHTML == "true") {
-                    bidstrue[i].innerHTML = "<div class='bidding'>Budgiving pågår</div>";
-                }
-                else {
-                    bidstrue[i].innerHTML = "";
-                }
-            
             }
             else if (list[i].deleted != true && list[i].type == typesOutput.value && list[i].county == district.value && list[i].price >= minPrice.value && list[i].price <= maxPrice.value && list[i].room >= minRoom.value && list[i].room <= maxRoom.value) {
 
@@ -95,14 +87,7 @@ function homes(list) {
                     </div>
                 </a>
             </div>`;
-                var bidstrue = document.getElementsByClassName("bids");
-            
-                if (bidstrue[i].innerHTML == "true") {
-                    bidstrue[i].innerHTML = "<div class='bidding'>Budgiving pågår</div>";
-                }
-                    else {
-                            bidstrue[i].innerHTML = "";
-                        }
+ 
             }
 
             else if (list[i].deleted != true && typesOutput.value == "" && district.value == "" && list[i].price >= minPrice.value && list[i].price <= maxPrice.value && list[i].room >= minRoom.value && list[i].room <= maxRoom.value) {
@@ -124,24 +109,20 @@ function homes(list) {
                     </div>
                 </a>
             </div>`;
-                var bidstrue = document.getElementsByClassName("bids");
 
-                if (bidstrue[i].innerHTML == "true") {
-                    bidstrue[i].innerHTML = "<div class='bidding'>Budgiving pågår</div>";
-                }
-                else {
-                    bidstrue[i].innerHTML = "";
-                }
 
-     
+
+
+
+            }
+
+ 
         }
         if (listnings.innerHTML == "") {
-            listnings.innerHTML += "<h2>Det finns inga bostäder som matchar sökkriterierna"
+            listnings.innerHTML += "<h2>Det finns inga bostäder som matchar sökkriterierna</h2>";
         }
-       
     }
 }
-
 
 minRoom.onchange = function () {
     minroomout.innerHTML = minRoom.value;

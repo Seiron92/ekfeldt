@@ -47,7 +47,7 @@ namespace project.Controllers
                     Title = item.Title,
                     Image = item.Image
                 };
-                        Brokers.Add(brok);
+                Brokers.Add(brok);
             }
 
             ViewBag.BrokerList = Brokers;

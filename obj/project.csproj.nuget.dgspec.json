@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rebecca Lap\\Desktop\\dt102g_projekt-master\\project.csproj": {}
+    "C:\\Users\\Rebecca Lap\\Desktop\\Mittuniversitetet\\ÅR 2\\DT102G c# i ASP.net\\projekt\\dt102g_projekt-master\\project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rebecca Lap\\Desktop\\dt102g_projekt-master\\project.csproj": {
+    "C:\\Users\\Rebecca Lap\\Desktop\\Mittuniversitetet\\ÅR 2\\DT102G c# i ASP.net\\projekt\\dt102g_projekt-master\\project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rebecca Lap\\Desktop\\dt102g_projekt-master\\project.csproj",
+        "projectUniqueName": "C:\\Users\\Rebecca Lap\\Desktop\\Mittuniversitetet\\ÅR 2\\DT102G c# i ASP.net\\projekt\\dt102g_projekt-master\\project.csproj",
         "projectName": "project",
-        "projectPath": "C:\\Users\\Rebecca Lap\\Desktop\\dt102g_projekt-master\\project.csproj",
+        "projectPath": "C:\\Users\\Rebecca Lap\\Desktop\\Mittuniversitetet\\ÅR 2\\DT102G c# i ASP.net\\projekt\\dt102g_projekt-master\\project.csproj",
         "packagesPath": "C:\\Users\\Rebecca Lap\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rebecca Lap\\Desktop\\dt102g_projekt-master\\obj\\",
+        "outputPath": "C:\\Users\\Rebecca Lap\\Desktop\\Mittuniversitetet\\ÅR 2\\DT102G c# i ASP.net\\projekt\\dt102g_projekt-master\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Rebecca Lap\\AppData\\Roaming\\NuGet\\NuGet.Config",
