@@ -28,11 +28,11 @@ function homes(list) {
       
 
                 listnings.innerHTML += `
-            <div class="homesSection">
+            <div class="homesSection margin">
                 <a target="_blank" href="/Home/Details/${list[i].homeId}?BrokerId=${list[i].brokerId}">
      
                        <img class="imagesInner" src="/images/${list[i].imageAddress}" alt="Bild på hus/bostadsrätt" /><div class="bids">${bids}</div><div class="inner">
-                        <h2>${list[i].city}</h3><ul>
+                        <h2>${list[i].city}</h2><h3>${list[i].street}</h3><ul>
                             <li> <i class="fas fa-home"></i> ${list[i].type}</li>
                             <li>
                                 <i class="fas fa-ruler-combined"></i> ${list[i].livingArea}
@@ -50,11 +50,11 @@ function homes(list) {
             else if (list[i].deleted != true && typesOutput.value == "" && district.value == list[i].county && list[i].price >= minPrice.value && list[i].price <= maxPrice.value && list[i].room >= minRoom.value && list[i].room <= maxRoom.value) {
     
                 listnings.innerHTML += `
-             <div class="homesSection">
+             <div class="homesSection margin">
                 <a target="_blank" href="/Home/Details/${list[i].homeId}?BrokerId=${list[i].brokerId}">
      
                        <img class="imagesInner" src="/images/${list[i].imageAddress}" alt="Bild på hus/bostadsrätt" /><div class="bids">${bids}</div><div class="inner">
-                        <h2>${list[i].city}</h3><ul>
+                        <h2>${list[i].city}</h2><h3>${list[i].street}</h3><ul>
                             <li> <i class="fas fa-home"></i> ${list[i].type}</li>
                             <li>
                                 <i class="fas fa-ruler-combined"></i> ${list[i].livingArea}
@@ -72,11 +72,11 @@ function homes(list) {
             else if (list[i].deleted != true && list[i].type == typesOutput.value && list[i].county == district.value && list[i].price >= minPrice.value && list[i].price <= maxPrice.value && list[i].room >= minRoom.value && list[i].room <= maxRoom.value) {
 
                 listnings.innerHTML += `
-             <div class="homesSection">
+             <div class="homesSection margin">
                 <a target="_blank" href="/Home/Details/${list[i].homeId}?BrokerId=${list[i].brokerId}">
      
                        <img class="imagesInner" src="/images/${list[i].imageAddress}" alt="Bild på hus/bostadsrätt" /><div class="bids">${bids}</div><div class="inner">
-                        <h2>${list[i].city}</h3><ul>
+                       <h2>${list[i].city}</h2><h3>${list[i].street}</h3><ul>
                             <li> <i class="fas fa-home"></i> ${list[i].type}</li>
                             <li>
                                 <i class="fas fa-ruler-combined"></i> ${list[i].livingArea}
@@ -94,11 +94,11 @@ function homes(list) {
             else if (list[i].deleted != true && typesOutput.value == "" && district.value == "" && list[i].price >= minPrice.value && list[i].price <= maxPrice.value && list[i].room >= minRoom.value && list[i].room <= maxRoom.value) {
 
                 listnings.innerHTML += `
-             <div class="homesSection">
+             <div class="homesSection margin">
                 <a target="_blank" href="/Home/Details/${list[i].homeId}?BrokerId=${list[i].brokerId}">
      
                        <img class="imagesInner" src="/images/${list[i].imageAddress}" alt="Bild på hus/bostadsrätt" /><div class="bids">${bids}</div><div class="inner">
-                        <h2>${list[i].city}</h3><ul>
+                        <h2>${list[i].city}</h2><h3>${list[i].street}</h3><ul>
                             <li> <i class="fas fa-home"></i> ${list[i].type}</li>
                             <li>
                                 <i class="fas fa-ruler-combined"></i> ${list[i].livingArea}
@@ -110,10 +110,6 @@ function homes(list) {
                     </div>
                 </a>
             </div>`;
-
-
-
-
 
             }
 
@@ -137,7 +133,7 @@ minRoom.onchange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var display = JSON.parse(this.response);
                 homes(display);
-                // console.log(display)
+                 console.log(display)
             }
         };
         xhr.open('GET','https://ekfeldt.herokuapp.com/api/HomesApi/', true);
