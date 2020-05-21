@@ -22,6 +22,7 @@ function homes(list) {
             } else {
                 bids = "";
             }
+            var price = list[i].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
             if (list[i].deleted != true && list[i].type == typesOutput.value && district.value == "" && list[i].price >= minPrice.value && list[i].price <= maxPrice.value && list[i].room >= minRoom.value && list[i].room <= maxRoom.value) {
               
       
@@ -39,7 +40,7 @@ function homes(list) {
                                 </li>
                             <li><i class="fas fa-tree"></i> ${list[i].gardenArea}kvm</li>
                             <li><i class="fas fa-expand"></i> ${list[i].room} rum</li>
-                        </ul><h3> ${list[i].price}</h3>
+                        </ul><h3> ${price} kr</h3>
                     </div>
                 </a>
             </div>`;
@@ -61,7 +62,7 @@ function homes(list) {
                                 </li>
                             <li><i class="fas fa-tree"></i> ${list[i].gardenArea}kvm</li>
                             <li><i class="fas fa-expand"></i> ${list[i].room} rum</li>
-                        </ul><h3> ${list[i].price}</h3>
+                       </ul><h3> ${price} kr</h3>
                     </div>
                 </a>
             </div>`;
@@ -83,7 +84,7 @@ function homes(list) {
                                 </li>
                             <li><i class="fas fa-tree"></i> ${list[i].gardenArea}kvm</li>
                             <li><i class="fas fa-expand"></i> ${list[i].room} rum</li>
-                        </ul><h3> ${list[i].price}</h3>
+                       </ul><h3> ${price} kr</h3>
                     </div>
                 </a>
             </div>`;
@@ -105,7 +106,7 @@ function homes(list) {
                                 </li>
                             <li><i class="fas fa-tree"></i> ${list[i].gardenArea}kvm</li>
                             <li><i class="fas fa-expand"></i> ${list[i].room} rum</li>
-                        </ul><h3> ${list[i].price}</h3>
+                        </ul><h3> ${price} kr</h3>
                     </div>
                 </a>
             </div>`;
