@@ -62,7 +62,8 @@ html, body {
 nav {
   position: fixed !important;
   z-index: 4 !important;
-  width: 100% !important; }
+  width: 100% !important;
+  height: 56px; }
   nav li a {
     color: #ee8a29 !important; }
   @media (max-width: 992px) {
